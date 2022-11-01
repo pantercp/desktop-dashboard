@@ -25,6 +25,19 @@ def append_dict_as_row(file_name, dict_of_elem, field_names):
         dict_writer.writerow(dict_of_elem)
 
 '''
+REWRITE OBJECTIVES WITH A GIVEN LIST OF DICTIONARIES
+'''
+
+def rewrite_objectives(listdict):
+
+    with open(source_dir+file_name, 'w', newline='') as write_obj:
+        field_names = ['ID','Date','Category','Objective','Deadline','Complete']
+        dict_writer = DictWriter(write_obj, fieldnames=field_names)
+        dw = csv.DictWriter(write_obj, delimiter=',', fieldnames=field_names)
+        dw.writeheader()              
+        dict_writer.writerows(listdict)
+        
+'''
 DISPLAYS CATEGORY OPTIONS AND RETURNS CHOICE
 '''
 
@@ -115,19 +128,43 @@ def completed_objectives():
                     if confirm.upper() == 'Y':
                         with open(source_dir+file_name) as read_obj:
                             DictReader = csv.DictReader(read_obj)
-                            lines = list(DictReader)
+                            listdict = list(DictReader)
                             print()
                             completed = str(input('What date was it completed? (%D/%M/%Y)\n>>> '))
-                            lines[int(obj_id)-1]['Complete'] = completed
-        
-                        with open(source_dir+file_name, 'w', newline='') as write_obj:
-                            field_names = ['ID','Date','Category','Objective','Deadline','Complete']
-                            dict_writer = DictWriter(write_obj, fieldnames=field_names)
-                            dw = csv.DictWriter(write_obj, delimiter=',', fieldnames=field_names)
-                            dw.writeheader()              
-                            dict_writer.writerows(lines)
+                            listdict[int(obj_id)-1]['Complete'] = completed
+                        # Rewrites objectives with updated information
+                        rewrite_objectives(listdict)            
                         print('\nCongratulations! This objective has become a milestone!')
                         user_input = input('\nHave you completed any other objectives? (Y/N)\n>>> ')
+
+'''
+FUNCTION TO DELETE ANY EXISTING OBJECTIVES OR MILESTONES AND REWRITE THE IDs
+'''
+
+def delete_objective():
+            
+    with open(source_dir+file_name) as read_obj:
+        DictReader = csv.DictReader(read_obj)       
+        print()
+        for row in DictReader:
+            print(row['ID'],row['Objective'])
+     
+    with open(source_dir+file_name) as read_obj:
+        DictReader = csv.DictReader(read_obj)
+        listdict = list(DictReader)
+        
+    user_input = input('\nWhich objective would you like to delete? (ID num)\n>>> ')
+    confirm_input = input(f'\nAre you sure you want to delete: \n\n{listdict[int(user_input)-1]}\n\n(Y/N) >>> ')
+    if confirm_input.upper() == 'Y':
+        del listdict[int(user_input)-1]
+    
+    i = 1
+    for row in listdict:
+        row['ID'] = i
+        i += 1
+    
+    rewrite_objectives(listdict)
+
 
 '''
 COLLECTS MILESTONES AS A LIST OF DICTIONARIES
@@ -163,7 +200,7 @@ file_name = r'\objectives.csv'
 today = date.today()
 dateformat = today.strftime("%d/%m/%Y")
 
-
+print('\nTo remove any objective enter: delete_objective()\n')
 add_objectives()
 completed_objectives()
 # objectives = []
@@ -171,7 +208,7 @@ completed_objectives()
 # milestones = []
 # collect_milestones()
 
-            
+
 
 
 # CREATE LIST OF DICTIONARIES FOR DISPLAY
