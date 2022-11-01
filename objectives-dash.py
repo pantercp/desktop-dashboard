@@ -31,20 +31,21 @@ FUNCTION THAT TAKES INPUT FROM USER AND ADDS TO OBJECTIVES DATABASE
 def add_objectives():
 
     # Adds New Objectives to the CSV Document
-    lines = pd.read_csv(source_dir+file_name)
+    lines, count = pd.read_csv(source_dir+file_name), 1
     entry = str(input('Do you have an objective to add? (Y/N)\n>>> '))
+    count = 1
     while entry.upper() == 'Y':
-    
+        
         inp_category = str(input('What category is the objective?\n>>> '))
         inp_obj = str(input('What is the objective?\n>>> '))
         inp_deadline = str(input('When do you need to complete it?\n>>> '))
         field_names = ['ID','Date','Category','Objective','Deadline','Complete']
-        row_dict = {'ID':len(lines)+1,'Date': dateformat,'Category': inp_category,'Objective':inp_obj,'Deadline':inp_deadline,'Complete':'False'}
+        row_dict = {'ID':len(lines)+count,'Date': dateformat,'Category': inp_category,'Objective':inp_obj,'Deadline':inp_deadline,'Complete':'False'}
         append_dict_as_row(source_dir+file_name, row_dict, field_names)
         entry = 'N'
+        count += 1
         entry = str(input('Do you have another objective to add (Y/N)?\n>>> '))
         
-
 '''
 FUNCTION FOR UPDATING COMPLETED OBJECTIVES
 '''
@@ -60,20 +61,31 @@ def completed_objectives():
                 if row['Complete'] == 'False':
                     print(row['ID'],row['Objective'])
             print()
-
-        obj_id = str(input('Which objective did you complete? (ID num)\n>>> '))
-        print()
-
-        with open(source_dir+file_name, 'r', newline='') as read_obj:
-            DictReader = csv.DictReader(read_obj)
-            for row in DictReader:
-                if row['ID'] == obj_id:
-                    print(row)
-                    confirm = input('\nDid you complete this one?(Y/N)\n')
-                    if confirm.upper() == 'Y':
-                        fulfilled = input('\nDate completed? (%d/%m/%Y)\n>>> ')
-                        row['Complete'] = fulfilled
-  
+    
+    obj_id = str(input('Which objective did you complete? (ID num)\n>>> '))
+    print()
+    
+    with open(source_dir+file_name, 'r', newline='') as read_obj:
+        DictReader = csv.DictReader(read_obj)
+        for row in DictReader:
+            if row['ID'] == obj_id:
+                print(row)
+                confirm = input('\nDid you complete this one?(Y/N)\n>>> ')
+                if confirm.upper() == 'Y':
+                    with open(source_dir+file_name) as read_obj:
+                        DictReader = csv.DictReader(read_obj)
+                        lines = list(DictReader)
+                        print()
+                        completed = str(input('What date was it completed? (%D/%M/%Y)\n>>> '))
+                        lines[int(obj_id)-1]['Complete'] = completed
+    
+                    with open(source_dir+file_name, 'w') as write_obj:
+                        field_names = ['ID','Date','Category','Objective','Deadline','Complete']
+                        dict_writer = DictWriter(write_obj, fieldnames=field_names)
+                        dw = csv.DictWriter(write_obj, delimiter=',', fieldnames=field_names)
+                        dw.writeheader()              
+                        dict_writer.writerows(lines)
+                    print('\nCongratulations! This objective has become a milestone!')
 
 '''
 COLLECTS MILESTONES AS A LIST OF DICTIONARIES
@@ -81,14 +93,23 @@ COLLECTS MILESTONES AS A LIST OF DICTIONARIES
 
 def collect_milestones():
 
-    milestones = []
-
     with open(source_dir+file_name, 'r', newline='') as read_obj:
         DictReader = csv.DictReader(read_obj)
         for row in DictReader:
             if row['Complete'] != 'False':
                 milestones.append(row)
 
+'''
+COLLECTS MILESTONES AS A LIST OF DICTIONARIES
+'''
+
+def collect_objectives():
+
+    with open(source_dir+file_name, 'r', newline='') as read_obj:
+        DictReader = csv.DictReader(read_obj)
+        for row in DictReader:
+            if row['Complete'] == 'False':
+                objectives.append(row)
 
 '''
 THIS IS WHERE THE PROGRAM BEGINS
@@ -102,8 +123,11 @@ dateformat = today.strftime("%d/%m/%Y")
 
 
 add_objectives()
-completed_objectives()
-collect_milestones()
+completed_objectives() # Needs to change 'Complete': 'False' to valid date
+# objectives = []
+# collect_objectives()
+# milestones = []
+# collect_milestones()
 
 
 
