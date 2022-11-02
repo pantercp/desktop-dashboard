@@ -77,7 +77,6 @@ def category_choice():
         
     return category_output
 
-
 '''
 FUNCTION THAT TAKES INPUT FROM USER AND ADDS TO OBJECTIVES DATABASE
 '''
@@ -86,7 +85,7 @@ def add_objectives():
 
     # Adds New Objectives to the CSV Document
     lines, count = pd.read_csv(source_dir+file_name), 1
-    entry = str(input('Do you have an objective to add? (Y/N)\n>>> '))
+    entry = str(input('\nDo you have an objective to add? (Y/N)\n>>> '))
     count = 1
     while entry.upper() == 'Y':
         
@@ -107,64 +106,33 @@ FUNCTION FOR UPDATING COMPLETED OBJECTIVES
 def completed_objectives():
 
     user_input = input('\nHave you completed any objectives? (Y/N)\n>>> ')
-    print()
     while user_input.upper() == 'Y':
-        with open(source_dir+file_name, 'r', newline='') as read_obj:
-            DictReader = csv.DictReader(read_obj)
-            for row in DictReader:
-                if row['Complete'] == 'False':
-                    print(row['ID'],row['Objective'])
-            print()
-    
-        obj_id = str(input('Which objective did you complete? (ID num)\n>>> '))
-        print()
+        display_objectives() 
+        obj_id = str(input('\nWhich objective did you complete? (ID num)("cancel" to quit)\n>>> '))
     
         with open(source_dir+file_name, 'r', newline='') as read_obj:
             DictReader = csv.DictReader(read_obj)
-            for row in DictReader:
+            for row in DictReader: # Don't think the order of this logic is correct
                 if row['ID'] == obj_id:
+                    print()
                     print(row)
                     confirm = input('\nDid you complete this one?(Y/N)\n>>> ')
                     if confirm.upper() == 'Y':
+                        # Collect list of dicts from CSV document
                         with open(source_dir+file_name) as read_obj:
                             DictReader = csv.DictReader(read_obj)
                             listdict = list(DictReader)
-                            print()
-                            completed = str(input('What date was it completed? (%D/%M/%Y)\n>>> '))
+                            # Enter information for updating document
+                            completed = str(input('\nWhat date was it completed? (%D/%M/%Y)\n>>> '))
                             listdict[int(obj_id)-1]['Complete'] = completed
                         # Rewrites objectives with updated information
                         rewrite_objectives(listdict)            
                         print('\nCongratulations! This objective has become a milestone!')
                         user_input = input('\nHave you completed any other objectives? (Y/N)\n>>> ')
-
-'''
-FUNCTION TO DELETE ANY EXISTING OBJECTIVES OR MILESTONES AND REWRITE THE IDs
-'''
-
-def delete_objective():
-            
-    with open(source_dir+file_name) as read_obj:
-        DictReader = csv.DictReader(read_obj)       
-        print()
-        for row in DictReader:
-            print(row['ID'],row['Objective'])
-     
-    with open(source_dir+file_name) as read_obj:
-        DictReader = csv.DictReader(read_obj)
-        listdict = list(DictReader)
-        
-    user_input = input('\nWhich objective would you like to delete? (ID num)\n>>> ')
-    confirm_input = input(f'\nAre you sure you want to delete: \n\n{listdict[int(user_input)-1]}\n\n(Y/N) >>> ')
-    if confirm_input.upper() == 'Y':
-        del listdict[int(user_input)-1]
-    
-    i = 1
-    for row in listdict:
-        row['ID'] = i
-        i += 1
-    
-    rewrite_objectives(listdict)
-
+                elif obj_id.lower() == 'cancel':
+                    user_input = 'N'
+                # else:
+                #     user_input = input('Do you want to select another objective? (Y/N)\n>>> ')
 
 '''
 COLLECTS MILESTONES AS A LIST OF DICTIONARIES
@@ -175,7 +143,7 @@ def collect_milestones():
     with open(source_dir+file_name, 'r', newline='') as read_obj:
         DictReader = csv.DictReader(read_obj)
         for row in DictReader:
-            if row['Complete'] != 'False':
+            if row['Complete'] != 'False' and row not in milestones:
                 milestones.append(row)
 
 '''
@@ -187,8 +155,82 @@ def collect_objectives():
     with open(source_dir+file_name, 'r', newline='') as read_obj:
         DictReader = csv.DictReader(read_obj)
         for row in DictReader:
-            if row['Complete'] == 'False':
+            if row['Complete'] == 'False' and row not in objectives:
                 objectives.append(row)
+                
+'''
+DISPLAY OBJECTIVES WITH ID & CATEGORY
+'''
+
+def display_objectives():
+    
+    collect_objectives()
+    print('\nYour current outstanding objectives are:\n')
+    for row in objectives:
+        print(row['ID'],row['Category'],'-',row['Objective'])
+    
+'''
+DISPLAY MILESTONES WITH ID & CATEGORY
+'''
+
+def display_milestones():
+    
+    collect_milestones()
+    print('\nYou have achieved the following milestones:\n')
+    for row in milestones:
+        print(row['ID'],row['Category'],'-',row['Objective'])
+
+'''
+DISPLAY BOTH OBJECTIVES & MILESTONES
+'''
+
+def display_all():
+    
+    display_objectives()
+    display_milestones()
+
+'''
+FUNCTION TO DELETE ANY EXISTING OBJECTIVES OR MILESTONES AND REWRITE THE IDs
+'''
+
+def delete_item():
+    
+    repeat = input('Would you like to delete an objective or milestone? (Y/N)\n>>> ')        
+    while repeat.upper() == 'Y':
+
+        with open(source_dir+file_name) as read_obj:
+            DictReader = csv.DictReader(read_obj)       
+            print()
+            for row in DictReader:
+                print(row['ID'],row['Objective'])
+         
+        with open(source_dir+file_name) as read_obj:
+            DictReader = csv.DictReader(read_obj)
+            listdict = list(DictReader)
+            
+        user_input = input('\nWhich item would you like to delete? (ID num)\n>>> ')
+        
+        while not user_input.isnumeric():
+            user_input = input('\nNot a number, please enter a valid ID number to delete\n>>> ')
+            
+        while int(user_input) > len(listdict) or 0 > int(user_input):
+            user_input = input('\nID number does not exist, please choose an item to delete\n>>> ')
+            
+        confirm_input = input(f'\nAre you sure you want to delete: \n\n{listdict[int(user_input)-1]}\n\n(Y/N) >>> ')
+        if confirm_input.upper() == 'Y':
+            del listdict[int(user_input)-1]
+            # Ammend the ID numbers so they are still sequential
+            i = 1
+            for row in listdict:
+                row['ID'] = i
+                i += 1
+            # Overwrite the existing csv document 
+            rewrite_objectives(listdict)
+            print('\nItem has been deleted from document')
+            repeat = input('\nWould you like to delete another objective or milestone? (Y/N)\n>>> ')
+        else:
+            repeat = input('\nWould you like to delete an objective or milestone? (Y/N)\n>>> ')
+
 
 '''
 THIS IS WHERE THE PROGRAM BEGINS
@@ -200,14 +242,24 @@ file_name = r'\objectives.csv'
 today = date.today()
 dateformat = today.strftime("%d/%m/%Y")
 
-print('\nTo remove any objective enter: delete_objective()\n')
+print('\nAccess extra function features using:\n\ndisplay_objectives()\
+      \ndisplay_milestones()\ndisplay_all()\ndelete_item()')
+
+objectives = []
+milestones = []      
 add_objectives()
 completed_objectives()
-# objectives = []
-# collect_objectives()
-# milestones = []
-# collect_milestones()
 
+
+
+'''
+TESTING AREA FOR EXTRA FUNCTION FEATURES
+'''
+
+# display_objectives()
+# display_milestones()
+# display_all()
+# delete_item()
 
 
 
