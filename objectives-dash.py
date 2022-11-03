@@ -247,8 +247,32 @@ print('\nAccess extra function features using:\n\ndisplay_objectives()\
 
 objectives = []
 milestones = []      
-add_objectives()
-completed_objectives()
+# add_objectives()
+# completed_objectives()
+
+
+# CREATE FUNCTION TO CHANGE AN ITEM IN CSV DOC
+
+with open(source_dir+file_name) as read_obj:
+    DictReader = csv.DictReader(read_obj)
+    listdict = list(DictReader)
+    print()
+    
+for row in listdict:
+    print(row['ID'],row['Category'],row['Objective'],row['Deadline'])
+    
+# Conditionals still required
+choice = input('\nWhich item would you like to change? (ID num)\n>>> ')
+print()
+print(listdict[int(choice)-1])
+print()
+i = 0
+for key in listdict[0]:
+    print(i,key)
+    i += 1
+    
+column = input('\nWhich detail would you like to change?\n>>> ')
+# print(listdict[int(choice)-1][int(column)-1])
 
 
 
