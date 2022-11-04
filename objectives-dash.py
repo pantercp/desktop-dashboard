@@ -246,10 +246,13 @@ print('\nAccess extra function features using:\n\ndisplay_objectives()\
       \ndisplay_milestones()\ndisplay_all()\ndelete_item()')
 
 objectives = []
-milestones = []      
+milestones = []
+# display_all()
 # add_objectives()
 # completed_objectives()
-
+# display_objectives()
+# display_milestones()
+# delete_item()
 
 # CREATE FUNCTION TO CHANGE AN ITEM IN CSV DOC
 
@@ -266,24 +269,27 @@ choice = input('\nWhich item would you like to change? (ID num)\n>>> ')
 print()
 print(listdict[int(choice)-1])
 print()
-i = 0
 for key in listdict[0]:
-    print(i,key)
-    i += 1
+    print(key)
+        
     
-column = input('\nWhich detail would you like to change?\n>>> ')
-# print(listdict[int(choice)-1][int(column)-1])
+column = input('\nWhich detail would you like to change? ("Q" to quit)\n>>> ')
 
+if column in listdict[0].keys():
+    print('\nWould you like to change:\n>>> ',end='')
+    print(listdict[int(choice)-1][column])
+    confirm = input('\n(Y/N) >>> ')
+    if confirm.upper() == 'Y':
+        update = input('\nPlease enter new information\n>>> ')
+        listdict[int(choice)-1][column] = update
+        confirm = input('\nWould you like to irreversibly update your list? (Y/N)\n>>> ')
+        if confirm.upper() == 'Y':
+            rewrite_objectives(listdict)
+else:
+    change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
+    if change != 'Y':
+        print('Exitting and returning to program...')
 
-
-'''
-TESTING AREA FOR EXTRA FUNCTION FEATURES
-'''
-
-# display_objectives()
-# display_milestones()
-# display_all()
-# delete_item()
 
 
 
