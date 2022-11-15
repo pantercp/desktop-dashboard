@@ -256,42 +256,47 @@ milestones = []
 
 # CREATE FUNCTION TO CHANGE AN ITEM IN CSV DOC
 
-with open(source_dir+file_name) as read_obj:
-    DictReader = csv.DictReader(read_obj)
-    listdict = list(DictReader)
-    print()
-    
-for row in listdict:
-    print(row['ID'],row['Category'],row['Objective'],row['Deadline'])
-    
-# Conditionals still required
-choice = input('\nWhich item would you like to change? (ID num)\n>>> ')
-print()
-print(listdict[int(choice)-1])
-print()
-for key in listdict[0]:
-    print(key)
+def change_item():
+
+    with open(source_dir+file_name) as read_obj:
+        DictReader = csv.DictReader(read_obj)
+        listdict = list(DictReader)
+        print()
         
+    for row in listdict:
+        print(row['ID'],row['Category'],row['Objective'],row['Deadline'])
+        
+    # Conditionals still required
+    choice = input('\nWhich item would you like to change? (ID num)\n>>> ')
+    print()
+    print(listdict[int(choice)-1])
+    print()
+    for key in listdict[0]:
+        print(key)
+            
+        
+    column = input('\nWhich detail would you like to change? ("Q" to quit)\n>>> ')
     
-column = input('\nWhich detail would you like to change? ("Q" to quit)\n>>> ')
-
-if column in listdict[0].keys():
-    print('\nWould you like to change:\n>>> ',end='')
-    print(listdict[int(choice)-1][column])
-    confirm = input('\n(Y/N) >>> ')
-    if confirm.upper() == 'Y':
-        update = input('\nPlease enter new information\n>>> ')
-        listdict[int(choice)-1][column] = update
-        confirm = input('\nWould you like to irreversibly update your list? (Y/N)\n>>> ')
+    if column in listdict[0].keys():
+        print('\nWould you like to change:\n>>> ',end='')
+        print(listdict[int(choice)-1][column])
+        confirm = input('\n(Y/N) >>> ')
         if confirm.upper() == 'Y':
-            rewrite_objectives(listdict)
-else:
-    change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
-    if change != 'Y':
-        print('Exitting and returning to program...')
+            update = input('\nPlease enter new information\n>>> ')
+            listdict[int(choice)-1][column] = update
+            confirm = input('\nWould you like to irreversibly update your list? (Y/N)\n>>> ')
+            if confirm.upper() == 'Y':
+                rewrite_objectives(listdict)
+    else:
+        change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
+        if change.upper() == 'Y':
+            change_item()
+        else:
+            print('\nExiting and returning to program...')
+        
 
 
-
+# change_item()
 
 # CREATE LIST OF DICTIONARIES FOR DISPLAY
 # CHOOSE HOW MANY DAYS TO FULFILL THE OBJECTIVE
