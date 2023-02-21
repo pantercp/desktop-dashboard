@@ -124,6 +124,11 @@ def completed_objectives():
                             listdict = list(DictReader)
                             # Enter information for updating document
                             completed = str(input('\nWhat date was it completed? (%D/%M/%Y)\n>>> '))
+                            # Locates the dictionary in objectives list and deletes it to keep the
+                            # display functions up to date
+                            dict_index = next((index for (index, d) in enumerate(objectives) \
+                                               if d["Objective"] == f'{row["Objective"]}'), None)
+                            del objectives[dict_index]
                             listdict[int(obj_id)-1]['Complete'] = completed
                         # Rewrites objectives with updated information
                         rewrite_objectives(listdict)            
@@ -248,7 +253,7 @@ objectives = []
 milestones = []
 # display_all()
 # add_objectives()
-# completed_objectives()
+completed_objectives()
 # display_objectives()
 # display_milestones()
 # delete_item()
@@ -308,16 +313,31 @@ REQUIRED FUNCTIONS
 
 
 
+'''
+THIS IS TO CHECK WHETHER DICTIONARY IS IN LIST
+
+with open(source_dir+file_name) as read_obj:
+    DictReader = csv.DictReader(read_obj)
+    listdict = list(DictReader)
+    print()
+
+for row in listdict:
+    print(row)
+    print()
+    var = row
+
+'''
 
 
+'''
+RETURNS LIST INDEX FOR THE DICTIONARY
+'''
+# dict_index = next((index for (index, d) in enumerate(objectives) \
+#                    if d["Objective"] == "Complete 5 Pull-Ups from a dead hang"), None)
 
-
-
-
-
-
-
-
+# dict_index = next((index for (index, d) in enumerate(objectives) \
+#                    if d["Objective"] == f'{row["Objective"]}'), None)
+# del objectives[dict_index]
 
 
 
