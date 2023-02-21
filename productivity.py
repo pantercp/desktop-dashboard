@@ -93,7 +93,7 @@ def add_objectives():
         inp_obj = str(input('\nWhat is the objective?\n>>> '))
         inp_deadline = str(input('\nWhen do you need to complete it?\n>>> '))
         field_names = ['ID','Date','Category','Objective','Deadline','Complete']
-        row_dict = {'ID':len(lines)+count,'Date': dateformat,'Category': inp_category,'Objective':inp_obj,'Deadline':inp_deadline,'Complete':'False'}
+        row_dict = {'ID':len(lines)+count,'Date': dateformat,'Category': inp_category,'Objective':inp_obj,'Deadline':inp_deadline,'Complete':'FALSE'}
         append_dict_as_row(source_dir+file_name, row_dict, field_names)
         entry = 'N'
         count += 1
@@ -143,9 +143,8 @@ def collect_milestones():
     with open(source_dir+file_name, 'r', newline='') as read_obj:
         DictReader = csv.DictReader(read_obj)
         for row in DictReader:
-            if row['Complete'] != 'False' and row not in milestones:
+            if row['Complete'] != 'FALSE' and row not in milestones:
                 milestones.append(row)
-
 '''
 COLLECTS MILESTONES AS A LIST OF DICTIONARIES
 '''
@@ -155,7 +154,7 @@ def collect_objectives():
     with open(source_dir+file_name, 'r', newline='') as read_obj:
         DictReader = csv.DictReader(read_obj)
         for row in DictReader:
-            if row['Complete'] == 'False' and row not in objectives:
+            if row['Complete'] == 'FALSE' and row not in objectives:
                 objectives.append(row)
                 
 '''
