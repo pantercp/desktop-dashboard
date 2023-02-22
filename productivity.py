@@ -228,7 +228,7 @@ def delete_item():
             if listdict[int(user_input)] in objectives:
                 # Locates the dictionary in objectives list
                 dict_index = next((index for (index, d) in enumerate(objectives) \
-                                   if d["Objective"] == f'{row["Objective"]}'), None)
+                                   if d["Objective"] == f'{listdict[int(user_input)]["Objective"]}'), None)
                 del objectives[dict_index] # Keeps display functions up to date
 
             if listdict[int(user_input)] in milestones:
@@ -264,8 +264,8 @@ print('\nAccess extra function features using:\n\ndisplay_objectives()\
 objectives = []
 milestones = []
 display_all()
-# add_objectives()
-# completed_objectives()
+add_objectives()
+completed_objectives()
 # display_objectives()
 # display_milestones()
 delete_item()
