@@ -84,19 +84,29 @@ FUNCTION THAT TAKES INPUT FROM USER AND ADDS TO OBJECTIVES DATABASE
 def add_objectives():
 
     # Adds New Objectives to the CSV Document
-    lines, count = pd.read_csv(source_dir+file_name), 1
+    #lines, count = pd.read_csv(source_dir+file_name), 1
     entry = str(input('\nDo you have an objective to add? (Y/N)\n>>> '))
-    count = 1
+    # count = 1
     while entry.upper() == 'Y':
         
         inp_category = category_choice()
         inp_obj = str(input('\nWhat is the objective?\n>>> '))
         inp_deadline = str(input('\nWhen do you need to complete it?\n>>> '))
         field_names = ['ID','Date','Category','Objective','Deadline','Complete']
-        row_dict = {'ID':len(lines)+count,'Date': dateformat,'Category': inp_category,'Objective':inp_obj,'Deadline':inp_deadline,'Complete':'FALSE'}
+        
+        # Need to get maximum value of ID
+        with open(source_dir+file_name) as read_obj:
+            DictReader = csv.DictReader(read_obj)
+            listdict = list(DictReader)
+        max = 0
+        for row in listdict:
+            if int(row["ID"]) > int(max):
+                max = row["ID"]
+        
+        row_dict = {'ID':int(max)+1,'Date': dateformat,'Category': inp_category,'Objective':inp_obj,'Deadline':inp_deadline,'Complete':'FALSE'}
         append_dict_as_row(source_dir+file_name, row_dict, field_names)
         entry = 'N'
-        count += 1
+        #count += 1
         entry = str(input('\nDo you have another objective to add (Y/N)?\n>>> '))
         
 '''
@@ -265,10 +275,10 @@ objectives = []
 milestones = []
 display_all()
 add_objectives()
-completed_objectives()
+# completed_objectives()
 # display_objectives()
 # display_milestones()
-delete_item()
+# delete_item()
 
 # CREATE FUNCTION TO CHANGE AN ITEM IN CSV DOC
 
