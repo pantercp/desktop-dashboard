@@ -205,14 +205,16 @@ def delete_item():
         with open(source_dir+file_name) as read_obj:
             DictReader = csv.DictReader(read_obj)       
             print()
+            i = 0
             for row in DictReader:
-                print(row['ID'],row['Objective'])
+                print(i,row['Objective'])
+                i += 1
          
         with open(source_dir+file_name) as read_obj:
             DictReader = csv.DictReader(read_obj)
             listdict = list(DictReader)
             
-        user_input = input('\nWhich item would you like to delete? (ID num)\n>>> ')
+        user_input = input('\nWhich item would you like to delete? (Index num)\n>>> ')
         
         while not user_input.isnumeric():
             user_input = input('\nNot a number, please enter a valid ID number to delete\n>>> ')
@@ -220,21 +222,23 @@ def delete_item():
         while int(user_input) > len(listdict) or 0 > int(user_input):
             user_input = input('\nID number does not exist, please choose an item to delete\n>>> ')
             
-        confirm_input = input(f'\nAre you sure you want to delete: \n\n{listdict[int(user_input)-1]}\n\n(Y/N) >>> ')
+        confirm_input = input(f'\nAre you sure you want to delete: \n\n{listdict[int(user_input)]}\n\n(Y/N) >>> ')
         if confirm_input.upper() == 'Y':
-            del listdict[int(user_input)-1]
             
-            if row in objectives:
+            if listdict[int(user_input)] in objectives:
                 # Locates the dictionary in objectives list
                 dict_index = next((index for (index, d) in enumerate(objectives) \
                                    if d["Objective"] == f'{row["Objective"]}'), None)
                 del objectives[dict_index] # Keeps display functions up to date
 
-            if row in milestones:
+            if listdict[int(user_input)] in milestones:
                 # Locates the dictionary in objectives list
                 dict_index = next((index for (index, d) in enumerate(milestones) \
-                                   if d["Objective"] == f'{row["Objective"]}'), None)
+                                   if d["Objective"] == f'{listdict[int(user_input)]["Objective"]}'), None)
                 del milestones[dict_index] # Keeps display functions up to date
+            
+            del listdict[int(user_input)]
+
 
             # Overwrite the existing csv document 
             rewrite_objectives(listdict)
