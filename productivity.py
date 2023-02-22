@@ -274,11 +274,12 @@ print('\nAccess extra function features using:\n\ndisplay_objectives()\
 objectives = []
 milestones = []
 display_all()
-add_objectives()
+# add_objectives()
 # completed_objectives()
 # display_objectives()
 # display_milestones()
 # delete_item()
+
 
 # CREATE FUNCTION TO CHANGE AN ITEM IN CSV DOC
 
@@ -289,40 +290,49 @@ def change_item():
         listdict = list(DictReader)
         print()
         
+    i = 0
     for row in listdict:
-        print(row['ID'],row['Category'],row['Objective'],row['Deadline'])
+        print(i,row['Category'],row['Objective'],row['Deadline'])
+        i += 1
         
     # Conditionals still required
     choice = input('\nWhich item would you like to change? (ID num)\n>>> ')
-    print()
-    print(listdict[int(choice)-1])
-    print()
+    print(f'\n{listdict[int(choice)]}\n')
     for key in listdict[0]:
         print(key)
             
-        
     column = input('\nWhich detail would you like to change? ("Q" to quit)\n>>> ')
     
-    if column in listdict[0].keys():
+    if column.capitalize() in listdict[0].keys():
         print('\nWould you like to change:\n>>> ',end='')
-        print(listdict[int(choice)-1][column])
+        print(listdict[int(choice)][column.capitalize()])
         confirm = input('\n(Y/N) >>> ')
         if confirm.upper() == 'Y':
             update = input('\nPlease enter new information\n>>> ')
-            listdict[int(choice)-1][column] = update
+            listdict[int(choice)][column.capitalize()] = update
             confirm = input('\nWould you like to irreversibly update your list? (Y/N)\n>>> ')
             if confirm.upper() == 'Y':
                 rewrite_objectives(listdict)
+                print(f'\nYour changes have been updated:\n\n{listdict[int(choice)]}')            
+                
+            else:
+                print('\nDid not press "Y"...')
+        else:
+            print('\nDid not press "Y"...')
     else:
         change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
         if change.upper() == 'Y':
             change_item()
         else:
-            print('\nExiting and returning to program...')
+            print('\nExiting and returning to program...\n')
+    
+    repeat = input("\nWould you like to change an item? (Y/N)\n>>> ")
+    if repeat.upper() == "Y":
+        change_item()
         
 
 
-# change_item()
+change_item()
 
 # CREATE LIST OF DICTIONARIES FOR DISPLAY
 # CHOOSE HOW MANY DAYS TO FULFILL THE OBJECTIVE
