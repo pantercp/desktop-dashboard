@@ -199,7 +199,7 @@ FUNCTION TO DELETE ANY EXISTING OBJECTIVES OR MILESTONES AND REWRITE THE IDs
 
 def delete_item():
     
-    repeat = input('Would you like to delete an objective or milestone? (Y/N)\n>>> ')        
+    repeat = input('\nWould you like to delete an objective or milestone? (Y/N)\n>>> ')        
     while repeat.upper() == 'Y':
 
         with open(source_dir+file_name) as read_obj:
@@ -223,11 +223,19 @@ def delete_item():
         confirm_input = input(f'\nAre you sure you want to delete: \n\n{listdict[int(user_input)-1]}\n\n(Y/N) >>> ')
         if confirm_input.upper() == 'Y':
             del listdict[int(user_input)-1]
-            # Ammend the ID numbers so they are still sequential
-            i = 1
-            for row in listdict:
-                row['ID'] = i
-                i += 1
+            
+            if row in objectives:
+                # Locates the dictionary in objectives list
+                dict_index = next((index for (index, d) in enumerate(objectives) \
+                                   if d["Objective"] == f'{row["Objective"]}'), None)
+                del objectives[dict_index] # Keeps display functions up to date
+
+            if row in milestones:
+                # Locates the dictionary in objectives list
+                dict_index = next((index for (index, d) in enumerate(milestones) \
+                                   if d["Objective"] == f'{row["Objective"]}'), None)
+                del milestones[dict_index] # Keeps display functions up to date
+
             # Overwrite the existing csv document 
             rewrite_objectives(listdict)
             print('\nItem has been deleted from document')
@@ -251,12 +259,12 @@ print('\nAccess extra function features using:\n\ndisplay_objectives()\
 
 objectives = []
 milestones = []
-# display_all()
+display_all()
 # add_objectives()
-completed_objectives()
+# completed_objectives()
 # display_objectives()
 # display_milestones()
-# delete_item()
+delete_item()
 
 # CREATE FUNCTION TO CHANGE AN ITEM IN CSV DOC
 
