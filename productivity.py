@@ -285,54 +285,74 @@ display_all()
 
 def change_item():
 
-    with open(source_dir+file_name) as read_obj:
-        DictReader = csv.DictReader(read_obj)
-        listdict = list(DictReader)
-        print()
+    repeat = "Y"
+    while repeat.upper() == "Y":
+
+        with open(source_dir+file_name) as read_obj:
+            DictReader = csv.DictReader(read_obj)
+            listdict = list(DictReader)
+            print()
         
-    i = 0
-    for row in listdict:
-        print(i,row['Category'],row['Objective'],row['Deadline'])
-        i += 1
-        
-    # Conditionals still required
-    choice = input('\nWhich item would you like to change? (ID num)\n>>> ')
-    print(f'\n{listdict[int(choice)]}\n')
-    for key in listdict[0]:
-        print(key)
+        i = 0
+        for row in listdict:
+            print(i,row['Category'],row['Objective'],row['Deadline'])
+            i += 1
             
-    column = input('\nWhich detail would you like to change? ("Q" to quit)\n>>> ')
+        # Conditionals still required
+        choice = input('\nWhich item would you like to change? (ID num)\n>>> ')
+        if choice.isnumeric() and int(choice) <= len(listdict)-1:
+            print(f'\n{listdict[int(choice)]}\n')
+            for key in listdict[0]:
+                print(key)         
+            column = input('\nWhich detail would you like to change? ("Q" to quit)\n>>> ')
+        else:
+            print("\nNot a valid entry!\n")
+            confirm = input("Do you still wish to change an item? (Y/N)\n>>> ")
+            if confirm.upper() == "Y":
+                change_item()
+            else:
+                repeat = "N"
+                break
     
-    if column.capitalize() in listdict[0].keys():
-        print('\nWould you like to change:\n>>> ',end='')
-        print(listdict[int(choice)][column.capitalize()])
-        confirm = input('\n(Y/N) >>> ')
-        if confirm.upper() == 'Y':
-            update = input('\nPlease enter new information\n>>> ')
-            listdict[int(choice)][column.capitalize()] = update
-            confirm = input('\nWould you like to irreversibly update your list? (Y/N)\n>>> ')
+        if column.capitalize() in listdict[0].keys():
+            print('\nWould you like to change:\n>>> ',end='')
+            print(listdict[int(choice)][column.capitalize()])
+            confirm = input('\n(Y/N) >>> ')
             if confirm.upper() == 'Y':
-                rewrite_objectives(listdict)
-                print(f'\nYour changes have been updated:\n\n{listdict[int(choice)]}')            
-                
+                update = input('\nPlease enter new information\n>>> ')
+                listdict[int(choice)][column.capitalize()] = update
+                confirm = input('\nWould you like to irreversibly update your list? (Y/N)\n>>> ')
+                if confirm.upper() == 'Y':
+                    rewrite_objectives(listdict)
+                    print(f'\nYour changes have been updated:\n\n{listdict[int(choice)]}')            
+                    
+                else:
+                    print('\nDid not press "Y"...')
+                    change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
+                    if change.upper() == 'Y':
+                        change_item()
+                    else:
+                        print('\nExiting and returning to program...')
+                        repeat = "N"
             else:
                 print('\nDid not press "Y"...')
+                change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
+                if change.upper() == 'Y':
+                    change_item()
+                else:
+                    print('\nExiting and returning to program...')
+                    repeat = "N"
         else:
-            print('\nDid not press "Y"...')
-    else:
-        change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
-        if change.upper() == 'Y':
-            change_item()
-        else:
-            print('\nExiting and returning to program...\n')
-    
-    repeat = input("\nWould you like to change an item? (Y/N)\n>>> ")
-    if repeat.upper() == "Y":
-        change_item()
+            change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
+            if change.upper() == 'Y':
+                change_item()
+            else:
+                print('\nExiting and returning to program...')
+                repeat = "N"
         
 
-
 change_item()
+print("\n...AAAANNNNDDDD YOU'RE BACK IN THE ROOM")
 
 # CREATE LIST OF DICTIONARIES FOR DISPLAY
 # CHOOSE HOW MANY DAYS TO FULFILL THE OBJECTIVE
