@@ -259,29 +259,8 @@ def delete_item():
 
 
 '''
-THIS IS WHERE THE PROGRAM BEGINS
+FUNCTION TO CHANGE AN ITEM IN CSV DOC
 '''
-
-source_dir = os.getcwd()
-file_name = r'\objectives.csv'
-
-today = date.today()
-dateformat = today.strftime("%d/%m/%Y")
-
-print('\nAccess extra function features using:\n\ndisplay_objectives()\
-      \ndisplay_milestones()\ndisplay_all()\ndelete_item()')
-
-objectives = []
-milestones = []
-display_all()
-# add_objectives()
-# completed_objectives()
-# display_objectives()
-# display_milestones()
-# delete_item()
-
-
-# CREATE FUNCTION TO CHANGE AN ITEM IN CSV DOC
 
 def change_item():
 
@@ -304,7 +283,7 @@ def change_item():
             print(f'\n{listdict[int(choice)]}\n')
             for key in listdict[0]:
                 print(key)         
-            column = input('\nWhich detail would you like to change? ("Q" to quit)\n>>> ')
+            category = input('\nWhich detail would you like to change? ("Q" to quit)\n>>> ')
         else:
             print("\nNot a valid entry!\n")
             confirm = input("Do you still wish to change an item? (Y/N)\n>>> ")
@@ -314,13 +293,13 @@ def change_item():
                 repeat = "N"
                 break
     
-        if column.capitalize() in listdict[0].keys():
+        if category.capitalize() in listdict[0].keys():
             print('\nWould you like to change:\n>>> ',end='')
-            print(listdict[int(choice)][column.capitalize()])
+            print(listdict[int(choice)][category.capitalize()])
             confirm = input('\n(Y/N) >>> ')
             if confirm.upper() == 'Y':
                 update = input('\nPlease enter new information\n>>> ')
-                listdict[int(choice)][column.capitalize()] = update
+                listdict[int(choice)][category.capitalize()] = update
                 confirm = input('\nWould you like to irreversibly update your list? (Y/N)\n>>> ')
                 if confirm.upper() == 'Y':
                     rewrite_objectives(listdict)
@@ -328,68 +307,98 @@ def change_item():
                     
                 else:
                     print('\nDid not press "Y"...')
-                    change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
+                    change = input('\nWould you like to try again? (Y/N)\n>>> ')
                     if change.upper() == 'Y':
                         change_item()
                     else:
                         print('\nExiting and returning to program...')
-                        repeat = "N"
+                        break
             else:
                 print('\nDid not press "Y"...')
-                change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
+                change = input('\nWould you like to try again? (Y/N)\n>>> ')
                 if change.upper() == 'Y':
                     change_item()
                 else:
                     print('\nExiting and returning to program...')
-                    repeat = "N"
+                    break
         else:
             change = input('\nNot a valid choice, would you like to try again? (Y/N)\n>>> ')
             if change.upper() == 'Y':
                 change_item()
             else:
                 print('\nExiting and returning to program...')
-                repeat = "N"
-        
+                break
 
-change_item()
-print("\n...AAAANNNNDDDD YOU'RE BACK IN THE ROOM")
+'''
+THIS IS WHERE THE PROGRAM BEGINS
+'''
 
-# CREATE LIST OF DICTIONARIES FOR DISPLAY
-# CHOOSE HOW MANY DAYS TO FULFILL THE OBJECTIVE
+source_dir = os.getcwd()
+file_name = r'\objectives.csv'
+
+today = date.today()
+dateformat = today.strftime("%d/%m/%Y")
+
+objectives = []
+milestones = []
+
+print('\nWelcome to your Productivity Dashboard!')
+
+options = ["Display All","Display Objectives","Display Milestones","Add Objectives","Completed\
+ Objectives", "Delete Item","Change Item"]
+            
+repeat = "Y"
+while repeat.upper() == "Y":
+    i = 0
+    print("\nYour dashboard options are the following:\n")
+    for option in options:
+        print(i, option)
+        i += 1
+    choice = input(f'\nEnter an option 0 to {len(options)-1} or hit [ENTER] to continue\n>>> ')
+    if choice.isnumeric() and int(choice) <= len(options)-1:
+        if int(choice) == 0:
+            print("Option 0")
+            display_all()
+        elif int(choice) == 1:
+            print("Option 1")
+            display_objectives()
+        elif int(choice) == 2:
+            print("Option 2")
+            display_milestones()
+        elif int(choice) == 3:
+            print("Option 3")
+            add_objectives()
+        elif int(choice) == 4:
+            print("Option 4")
+            completed_objectives()
+        elif int(choice) == 5:
+            print("Option 5")
+            delete_item()
+        elif int(choice) == 6:
+            print("Option 6")
+            change_item()
+    else:
+        print("\nTo continue to Desktop Changer...")
+        repeat = "N"
+
+print("\nJailbreak")
+
+# display_all()
+# add_objectives()
+# completed_objectives()
+# display_objectives()
+# display_milestones()
+# delete_item()
+# change_item()
+
 
 '''
 REQUIRED FUNCTIONS
 '''
-# CREATE A FUNCTION THAT DELETES A ROW AND AMMENDS ID NUMBERS
-# DISPLAY OUTSTANDING OBJECTIVES
 
 
 
-'''
-THIS IS TO CHECK WHETHER DICTIONARY IS IN LIST
 
-with open(source_dir+file_name) as read_obj:
-    DictReader = csv.DictReader(read_obj)
-    listdict = list(DictReader)
-    print()
-
-for row in listdict:
-    print(row)
-    print()
-    var = row
-
-'''
-
-
-'''
-RETURNS LIST INDEX FOR THE DICTIONARY
-'''
-# dict_index = next((index for (index, d) in enumerate(objectives) \
-#                    if d["Objective"] == "Complete 5 Pull-Ups from a dead hang"), None)
-
-# dict_index = next((index for (index, d) in enumerate(objectives) \
-#                    if d["Objective"] == f'{row["Objective"]}'), None)
-# del objectives[dict_index]
 
 
 
