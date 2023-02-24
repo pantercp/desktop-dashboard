@@ -9,7 +9,6 @@ import os
 import csv
 from csv import DictWriter
 from datetime import date
-import pandas as pd
 
 
 '''
