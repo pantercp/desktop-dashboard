@@ -16,9 +16,7 @@ from PIL import Image, ImageDraw, ImageFont
 FUNCTION TO DRAW LOGO IN CORNER OF RANDOMLY SELECTED IMAGE
 '''
 def draw_logo(image):
-    
-    image_width, image_height = image.size
-    
+        
     LogoIm = Image.open(source_dir+'\images\logo\ResizedLogo.png')
     Logo_Width, Logo_Height = LogoIm.size
     draw.ellipse((15, 935, 145, 1065), ("black"))
@@ -127,6 +125,55 @@ def choose_image():
     image_choice = choice(image_options)
     return image_choice
     
+
+'''
+DRAW INSPIRATIONAL TEXT IN BOTTOM RIGHT OF RANDOM IMAGE
+'''
+
+def inspire_text(image):
+    
+    # Choose font type and size
+    FontOne = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 23)
+    FontTwo = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
+    
+    # Get text width and heights
+    grat_width, grat_height = get_text_dimensions("Something to be grateful for: "+gratitude, FontOne)
+    tran_width, tran_height = get_text_dimensions("Translation: "+name["Meaning"], FontTwo)
+    name_width, name_height = get_text_dimensions("Names of Allah: "+name["Name"], FontOne)
+    title_width, title_height = get_text_dimensions("Photo: "+image_choice.replace(".png", ""), FontTwo)
+    affirm_width, affirm_height = get_text_dimensions(affirmation, FontOne)
+    
+    # Make widest text the width for the blurbs background
+    textWidths = [grat_width, tran_width, name_width, title_width, affirm_width]
+    blurb_width = max(textWidths)
+    
+    # Make background for the blurb the total height of all text
+    blurb_height = grat_height + tran_height + name_height + title_height
+    
+    # Draw backgrounds for the blurb
+    draw.rectangle((image_width-blurb_width-10, image_height-blurb_height-6,
+                    image_width+blurb_width, image_height+blurb_height), light_clr)
+    draw.rectangle((image_width-blurb_width-10, image_height-blurb_height-affirm_height -
+                    6, image_width+blurb_width, image_height-blurb_height-5), dark_clr)
+    
+    # Drawing Text for the blurb
+    draw.text((image_width-blurb_width-5, image_height-grat_height),
+              "Something to be grateful for: "+gratitude, dark_clr, font=FontOne)
+    draw.text((image_width-blurb_width-5, image_height-grat_height-tran_height),
+              "Translation: "+name["Meaning"], dark_clr, font=FontTwo)
+    draw.text((image_width-blurb_width-5, image_height-grat_height-tran_height-name_height-3),
+              "Names of Allah: "+name["Name"], dark_clr, font=FontOne)
+    draw.text((image_width-blurb_width-5, image_height-blurb_height-4),
+              "Photo: "+image_choice.replace(".png", ""), dark_clr, font=FontTwo)
+    
+    # Drawing Text for the header of the blurb
+    affirm_xcoord = image_width-(((blurb_width+10)/2)+(affirm_width/2))
+    draw.text((affirm_xcoord, image_height-blurb_height-affirm_height-6),
+              affirmation, light_clr, font=FontOne)
+    
+    image.save(source_dir+'\output\\'+datesave+'.png')
+
+
 '''
 PROGRAM RUNS FROM HERE
 '''
@@ -153,6 +200,8 @@ print(f'Grateful for: {gratitude}')
 RandomImage = Image.open(source_dir+'\images\\'+str(image_choice))
 # Ability to draw on inspiration image
 draw = ImageDraw.Draw(RandomImage)
+# Inspiration image sizes
+image_width, image_height = RandomImage.size
 # Puts CJPixel logo in bottom left corner
 draw_logo(RandomImage)
 # Locate & choose font format for drawing text
@@ -161,10 +210,7 @@ fontsFolder = 'C:\Windows\Fonts'
 dark_clr, light_clr = (23, 42, 58), (105, 209, 197)
 # Creates header in top left corner
 draw_header(RandomImage)
+# Draw inspiration text
+inspire_text(RandomImage)
 
 
-'''
-REQUIRED FUNCTIONS
-'''
-
-# DRAW INSPIRATION TEXT
