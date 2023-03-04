@@ -138,9 +138,9 @@ def inspire_text(image):
     
     # Get text width and heights
     grat_width, grat_height = get_text_dimensions("Something to be grateful for: "+gratitude, FontOne)
+    title_width, title_height = get_text_dimensions("Photo: "+image_choice.replace(".png", ""), FontTwo)
     tran_width, tran_height = get_text_dimensions("Translation: "+name["Meaning"], FontTwo)
     name_width, name_height = get_text_dimensions("Names of Allah: "+name["Name"], FontOne)
-    title_width, title_height = get_text_dimensions("Photo: "+image_choice.replace(".png", ""), FontTwo)
     affirm_width, affirm_height = get_text_dimensions(affirmation, FontOne)
     
     # Make widest text the width for the blurbs background
@@ -149,26 +149,28 @@ def inspire_text(image):
     
     # Make background for the blurb the total height of all text
     blurb_height = grat_height + tran_height + name_height + title_height
-    
+
+    padding = 10
     # Draw backgrounds for the blurb
-    draw.rectangle((image_width-blurb_width-10, image_height-blurb_height-6,
+    draw.rectangle((image_width-blurb_width-padding, image_height-blurb_height-padding/2,
                     image_width+blurb_width, image_height+blurb_height), light_clr)
-    draw.rectangle((image_width-blurb_width-10, image_height-blurb_height-affirm_height -
-                    6, image_width+blurb_width, image_height-blurb_height-5), dark_clr)
+    draw.rectangle((image_width-blurb_width-padding, image_height-blurb_height-affirm_height
+                , image_width+blurb_width, image_height-blurb_height), dark_clr)
+
     
     # Drawing Text for the blurb
-    draw.text((image_width-blurb_width-5, image_height-grat_height),
+    draw.text((image_width-blurb_width-padding/2, image_height-grat_height),
               "Something to be grateful for: "+gratitude, dark_clr, font=FontOne)
-    draw.text((image_width-blurb_width-5, image_height-grat_height-tran_height),
-              "Translation: "+name["Meaning"], dark_clr, font=FontTwo)
-    draw.text((image_width-blurb_width-5, image_height-grat_height-tran_height-name_height-3),
-              "Names of Allah: "+name["Name"], dark_clr, font=FontOne)
-    draw.text((image_width-blurb_width-5, image_height-blurb_height-4),
+    draw.text((image_width-blurb_width-padding/2, image_height-grat_height-tran_height),
               "Photo: "+image_choice.replace(".png", ""), dark_clr, font=FontTwo)
+    draw.text((image_width-blurb_width-padding/2, image_height-grat_height-tran_height-name_height),
+              "Translation: "+name["Meaning"], dark_clr, font=FontTwo)
+    draw.text((image_width-blurb_width-padding/2, image_height-blurb_height),
+              "Names of Allah: "+name["Name"], dark_clr, font=FontOne)
     
     # Drawing Text for the header of the blurb
     affirm_xcoord = image_width-(((blurb_width+10)/2)+(affirm_width/2))
-    draw.text((affirm_xcoord, image_height-blurb_height-affirm_height-6),
+    draw.text((affirm_xcoord, image_height-blurb_height-affirm_height),
               affirmation, light_clr, font=FontOne)
     
     image.save(source_dir+'\output\\'+datesave+'.png')
