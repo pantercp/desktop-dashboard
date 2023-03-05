@@ -60,23 +60,26 @@ def draw_objectives():
     
     y_coord = 20
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
-    draw.text((1475, y_coord), "Objectives", light_clr, font=FontHead)
+    draw.rectangle((1475, y_coord-5, 1915, y_coord + 35), test_clr)
+    draw.text((1480, y_coord), "Objectives", light_clr, font=FontHead)
     y_coord += 35
     # Font size for the Objectives
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 18)
     for row in objectives:
-        deadline = row["Deadline"]
-        deadlineFormat = datetime.strptime(deadline, "%d/%m/%Y")
-        countdown = objective_countdown(deadlineFormat)
+        deadline = row["Deadline"] # Get due date for objective
+        deadlineFormat = datetime.strptime(deadline, "%d/%m/%Y") # Format for function
+        countdown = objective_countdown(deadlineFormat) # Returns number of days left
+        # Draws objectives and deadline countdown onto wallpaper image
         obj_width, obj_height = get_text_dimensions(f'{row["Objective"]}', FontObj)
         days_width, days_height = get_text_dimensions(f'{countdown} Days', FontObj)
-        draw.text((1475, y_coord), f'{row["Objective"]}', light_clr, font=FontObj)
-        draw.text((1920 - days_width, y_coord), f'{countdown} Days', light_clr, font=FontObj)
-        y_coord += 30
+        draw.rectangle((1475, y_coord, 1915, y_coord + 30), test_clr)    
+        draw.text((1480, y_coord), f'{row["Objective"]}', light_clr, font=FontObj)
+        draw.text((1910 - days_width, y_coord), f'{countdown} Days', light_clr, font=FontObj)
+        y_coord += 30 # Moves coordinate for next objective to be written
 
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
     
-    return y_coord
+    return y_coord # So that the milestones can be drawn below the objectives
 
 
 '''
@@ -105,16 +108,18 @@ def draw_milestones(y_coord):
             if row['Complete'] != 'FALSE':
                 milestones.append(row)
     
-    y_coord += 10
+    y_coord += 20
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
-    draw.text((1475, y_coord), "Milestones", light_clr, font=FontHead)
+    draw.rectangle((1475, y_coord-5, 1915, y_coord + 35), test_clr)
+    draw.text((1480, y_coord), "Milestones", light_clr, font=FontHead)
     y_coord += 35
     
     # Font size for the Objectives
-    FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 18)
+    FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
     for row in milestones:
         obj_width, obj_height = get_text_dimensions(row["Objective"], FontObj)
-        draw.text((1475, y_coord), row["Objective"], light_clr, font=FontObj)
+        draw.rectangle((1475, y_coord, 1915, y_coord + 30), test_clr)
+        draw.text((1480, y_coord), row["Objective"], light_clr, font=FontObj)
         y_coord += 30
 
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
@@ -134,6 +139,7 @@ inspire_wallpaper()
 file_name = r'\objectives.csv'
 fontsFolder = 'C:\Windows\Fonts'
 dark_clr, light_clr = (23, 42, 58), (105, 209, 197)
+test_clr = (12, 21, 29)
 # Draws Objectives onto wallpaper and returns y for milestones
 y_coord = draw_objectives()
 # Draws Milestones below the objectives
