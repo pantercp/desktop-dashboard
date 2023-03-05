@@ -7,7 +7,7 @@ Created on Tue Nov 15 19:26:44 2022
 
 import os
 from PIL import Image, ImageDraw, ImageFont
-from datetime import date
+from datetime import datetime, date
 import csv
 
 
@@ -60,18 +60,35 @@ def draw_objectives():
     
     y_coord = 20
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
-    draw.text((1500, y_coord), "Objectives", light_clr, font=FontHead)
+    draw.text((1475, y_coord), "Objectives", light_clr, font=FontHead)
     y_coord += 35
     # Font size for the Objectives
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
     for row in objectives:
-        obj_width, obj_height = get_text_dimensions(row["Objective"], FontObj)
-        draw.text((1500, y_coord), row["Objective"], light_clr, font=FontObj)
+        deadline = row["Deadline"]
+        deadlineFormat = datetime.strptime(deadline, "%d/%m/%Y")
+        countdown = objective_countdown(deadlineFormat)
+        obj_width, obj_height = get_text_dimensions(row["Objective"]+str(countdown)+"Days", FontObj)
+        draw.text((1475, y_coord), f'{row["Objective"]} {countdown} Days', light_clr, font=FontObj)
         y_coord += 30
 
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
     
     return y_coord
+
+
+'''
+FIND NUMBER OF DAYS LEFT TO COMPLETE OBJECTIVE
+'''
+
+def objective_countdown(date):
+    
+    my_datetime = datetime.combine(today, datetime.min.time())
+    diff = date - my_datetime
+    countdown = diff.days
+    
+    return countdown
+    
 
 '''
 DISPLAY OUTSTANDING OBJECTIVES
@@ -88,14 +105,14 @@ def draw_milestones(y_coord):
     
     y_coord += 10
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
-    draw.text((1500, y_coord), "Milestones", light_clr, font=FontHead)
+    draw.text((1475, y_coord), "Milestones", light_clr, font=FontHead)
     y_coord += 35
     
     # Font size for the Objectives
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
     for row in milestones:
         obj_width, obj_height = get_text_dimensions(row["Objective"], FontObj)
-        draw.text((1500, y_coord), row["Objective"], light_clr, font=FontObj)
+        draw.text((1475, y_coord), row["Objective"], light_clr, font=FontObj)
         y_coord += 30
 
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
