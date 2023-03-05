@@ -9,6 +9,7 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime, date
 import csv
+import prayer_api
 
 
 '''
@@ -143,7 +144,30 @@ test_clr = (12, 21, 29)
 # Draws Objectives onto wallpaper and returns y for milestones
 y_coord = draw_objectives()
 # Draws Milestones below the objectives
-draw_milestones(y_coord)
+y_coord = draw_milestones(y_coord)
+# Gathers prayer times for the day
+timings = prayer_api.prayer_timings()
+timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),timings.pop("Sunset")
 
 
+def draw_prayertimes(y_coord):
 
+    y_coord += 20
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
+    draw.rectangle((1475, y_coord-5, 1915, y_coord + 35), test_clr)
+    draw.text((1480, y_coord), "Prayer Times", light_clr, font=FontHead)
+    y_coord += 35
+
+    FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
+
+    for info in timings:
+        obj_width, obj_height = get_text_dimensions(f'{info} {timings[info]}', FontObj)
+        draw.rectangle((1475, y_coord, 1915, y_coord + 30), test_clr)
+        draw.text((1480, y_coord),f'{info} {timings[info]}', light_clr, font=FontObj)
+        y_coord += 30
+        print(info, timings[info])
+        
+    DesktopImage.save(source_dir+r'\output\wallpaper.png')
+
+        
+draw_prayertimes(y_coord)
