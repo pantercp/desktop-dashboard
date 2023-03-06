@@ -180,7 +180,7 @@ def inspire_text(image):
 PROGRAM RUNS FROM HERE
 '''
 
-source_dir = os.getcwd()
+source_dir = "C:\\Users\\Ronaldo\\OneDrive\\Python\\git\\ninetynine"
 today = date.today()
 dateformat = today.strftime("%d/%m/%Y")
 datesave = today.strftime("%d-%m")
@@ -192,7 +192,7 @@ gratitude, affirmation = choose_insp()
 image_choice = choose_image()
 
 # Display all randomly selected variables
-print(f'\nTodays Date: {dateformat}\n*This is a randomly generated image')
+print(f'\nTodays Date: {dateformat}')
 print(f'\nAffirmation of the day: {affirmation}')
 print(f'Name of Allah: {name["Name"]}\nTranslation: {name["Meaning"]}')
 print(f'Photo Title: {image_choice.replace(".png", "")}')
@@ -214,5 +214,7 @@ dark_clr, light_clr = (23, 42, 58), (105, 209, 197)
 draw_header(RandomImage)
 # Draw inspiration text
 inspire_text(RandomImage)
+
+print("\nContinuing to Desktop Maker...")
 
 

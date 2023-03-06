@@ -13,9 +13,7 @@ import struct
 import ctypes
 
 
-source_dir = os.getcwd()
-
-
+source_dir = "C:\\Users\\Ronaldo\\OneDrive\\Python\\git\\ninetynine"
 
 SPI_SETDESKWALLPAPER = 20
 WALLPAPER_PATH = (source_dir+r'\output\wallpaper.png')
@@ -42,4 +40,7 @@ def change_wallpaper():
 
 
 change_wallpaper()
+
+print("\nYour Desktop has been updated, program complete!")
+
 

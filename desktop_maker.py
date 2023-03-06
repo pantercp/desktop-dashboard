@@ -128,7 +128,33 @@ def draw_milestones(y_coord):
     return y_coord
 
 
-source_dir = os.getcwd()
+'''
+DRAW PRAYER TIMES FOR CURRENT DAY ONTO WALLPAPER
+'''
+
+def draw_prayertimes(x_coord, y_coord):
+
+    y_coord += 20
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
+    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 200, y_coord + 215), test_clr)
+    draw.text((x_coord, y_coord), "Prayer Times", light_clr, font=FontHead)
+    y_coord += 35
+    FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
+
+    for info in timings:
+        obj_width, obj_height = get_text_dimensions(f'{info} {timings[info]}', FontObj)
+        draw.text((x_coord, y_coord),f'{info} {timings[info]}', light_clr, font=FontObj)
+        y_coord += 30
+        print(info, timings[info])
+        
+    DesktopImage.save(source_dir+r'\output\wallpaper.png')
+
+
+'''
+PROGRAM RUNS FROM HERE
+'''
+
+source_dir = "C:\\Users\\Ronaldo\\OneDrive\\Python\\git\\ninetynine"
 today = date.today()
 datesave = today.strftime("%d-%m")
 
@@ -146,28 +172,7 @@ y_coord = draw_objectives()
 # Draws Milestones below the objectives
 y_coord = draw_milestones(y_coord)
 # Gathers prayer times for the day
-timings = prayer_api.prayer_timings()
-timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),timings.pop("Sunset")
-
-
-def draw_prayertimes(y_coord):
-
-    y_coord += 20
-    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
-    draw.rectangle((1475, y_coord-5, 1915, y_coord + 35), test_clr)
-    draw.text((1480, y_coord), "Prayer Times", light_clr, font=FontHead)
-    y_coord += 35
-
-    FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
-
-    for info in timings:
-        obj_width, obj_height = get_text_dimensions(f'{info} {timings[info]}', FontObj)
-        draw.rectangle((1475, y_coord, 1915, y_coord + 30), test_clr)
-        draw.text((1480, y_coord),f'{info} {timings[info]}', light_clr, font=FontObj)
-        y_coord += 30
-        print(info, timings[info])
-        
-    DesktopImage.save(source_dir+r'\output\wallpaper.png')
-
-        
-draw_prayertimes(y_coord)
+timings, hijri = prayer_api.prayer_timings()
+timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),
+timings.pop("Sunset"),timings.pop("Midnight")   
+draw_prayertimes(1600, y_coord)

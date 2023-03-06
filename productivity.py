@@ -329,10 +329,10 @@ def change_item():
                 break
 
 '''
-THIS IS WHERE THE PROGRAM BEGINS
+PROGRAM RUNS FROM HERE
 '''
 
-source_dir = os.getcwd()
+source_dir = "C:\\Users\\Ronaldo\\OneDrive\\Python\\git\\ninetynine"
 file_name = r'\objectives.csv'
 
 today = date.today()
@@ -377,10 +377,9 @@ while repeat.upper() == "Y":
             print("Option 6")
             change_item()
     else:
-        print("\nTo continue to Desktop Changer...")
+        print("\nContinuing to Inspiration Image generator...")
         repeat = "N"
 
-print("\nJailbreak")
 
 # display_all()
 # add_objectives()

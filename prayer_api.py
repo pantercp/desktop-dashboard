@@ -17,8 +17,12 @@ def prayer_timings():
     dateformat = today.strftime("%d-%m-%Y")
     month = today.strftime("%m")
     year = today.strftime("%Y")
+    city = "London"
+    country = "United Kingdom"
     
-    response = requests.get(f'http://api.aladhan.com/v1/calendarByCity/{year}/{month}?city=London&country=United Kingdom&method=1')
+    print(f'Getting Prayer Times for {dateformat} in {city}, {country}...\n ')
+    
+    response = requests.get(f'http://api.aladhan.com/v1/calendarByCity/{year}/{month}?city={city}&country={country}&method=1')
     print(f'Response Status: {response.status_code}\n')
     
     data = response.json()
@@ -27,15 +31,18 @@ def prayer_timings():
     for info in data["data"]:
         if dateformat in info["date"]["gregorian"]["date"]:
             timings = info["timings"]
+            hijri = info["date"]["hijri"]
     
     # for info in timings:
     #     print(info, timings[info])
         
-    return timings
+    return timings, hijri
         
     
+# timings, hijri = prayer_timings()
 
-
+# print(hijri["day"], hijri["month"]["en"], hijri["year"],"AH")
+# print("Weekday:", hijri["weekday"]["en"])
 
 
 
