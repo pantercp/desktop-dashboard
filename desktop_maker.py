@@ -100,7 +100,7 @@ def objective_countdown(date):
 DISPLAY OUTSTANDING OBJECTIVES
 '''
 
-def draw_milestones(y_coord):
+def draw_milestones(x_coord, y_coord):
 
     milestones = []
     with open(source_dir+file_name, 'r', newline='') as read_obj:
@@ -111,16 +111,16 @@ def draw_milestones(y_coord):
     
     y_coord += 20
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
-    draw.rectangle((1475, y_coord-5, 1915, y_coord + 35), test_clr)
-    draw.text((1480, y_coord), "Milestones", light_clr, font=FontHead)
+    draw.rectangle((x_coord - 5, y_coord-5, x_coord + 440, y_coord + 35), test_clr)
+    draw.text((x_coord, y_coord), "Milestones", light_clr, font=FontHead)
     y_coord += 35
     
     # Font size for the Objectives
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
     for row in milestones:
         obj_width, obj_height = get_text_dimensions(row["Objective"], FontObj)
-        draw.rectangle((1475, y_coord, 1915, y_coord + 30), test_clr)
-        draw.text((1480, y_coord), row["Objective"], light_clr, font=FontObj)
+        draw.rectangle((x_coord - 5, y_coord, 1915, y_coord + 30), test_clr)
+        draw.text((x_coord, y_coord), row["Objective"], light_clr, font=FontObj)
         y_coord += 30
 
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
@@ -149,7 +149,19 @@ def draw_prayertimes(x_coord, y_coord):
         
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
 
+'''
+DRAW PRAYER TIMES FOR CURRENT DAY ONTO WALLPAPER
+'''
 
+def draw_hijri(x_coord, y_coord):
+
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
+    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 200, y_coord + 80), test_clr)
+    draw.text((x_coord, y_coord), f'{hijri["day"]} {hijri["month"]["en"]} {hijri["year"]}', light_clr, font=FontHead)
+        
+    DesktopImage.save(source_dir+r'\output\wallpaper.png')
+    
+    
 '''
 PROGRAM RUNS FROM HERE
 '''
@@ -170,9 +182,12 @@ test_clr = (12, 21, 29)
 # Draws Objectives onto wallpaper and returns y for milestones
 y_coord = draw_objectives()
 # Draws Milestones below the objectives
-y_coord = draw_milestones(y_coord)
+y_coord = draw_milestones(1480, y_coord)
 # Gathers prayer times for the day
 timings, hijri = prayer_api.prayer_timings()
 timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),
 timings.pop("Sunset"),timings.pop("Midnight")   
 draw_prayertimes(1600, y_coord)
+
+
+draw_hijri(1600,800)
