@@ -10,6 +10,7 @@ from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime, date
 import csv
 import prayer_api
+from weather_api import weather_forecast
 
 
 '''
@@ -61,9 +62,9 @@ def draw_objectives():
     
     y_coord = 20
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
-    draw.rectangle((1475, y_coord-5, 1915, y_coord + 35), test_clr)
-    draw.text((1480, y_coord), "Objectives", light_clr, font=FontHead)
-    y_coord += 35
+    draw.rectangle((1475, y_coord-5, 1915, y_coord + 35), light_clr)
+    draw.text((1480, y_coord), "Objectives", dark_clr, font=FontHead)
+    y_coord += 40
     # Font size for the Objectives
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 18)
     for row in objectives:
@@ -111,9 +112,9 @@ def draw_milestones(x_coord, y_coord):
     
     y_coord += 20
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
-    draw.rectangle((x_coord - 5, y_coord-5, x_coord + 440, y_coord + 35), test_clr)
-    draw.text((x_coord, y_coord), "Milestones", light_clr, font=FontHead)
-    y_coord += 35
+    draw.rectangle((x_coord - 5, y_coord-5, x_coord + 435, y_coord + 35), light_clr)
+    draw.text((x_coord, y_coord), "Milestones", dark_clr, font=FontHead)
+    y_coord += 40
     
     # Font size for the Objectives
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
@@ -136,8 +137,9 @@ def draw_prayertimes(x_coord, y_coord):
 
     y_coord += 20
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
-    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 200, y_coord + 215), test_clr)
-    draw.text((x_coord, y_coord), "Prayer Times", light_clr, font=FontHead)
+    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 200, y_coord + 30), light_clr)
+    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 200, y_coord + 210), test_clr)
+    draw.text((x_coord, y_coord), "Prayer Times", dark_clr, font=FontHead)
     y_coord += 35
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
 
@@ -155,13 +157,37 @@ DRAW PRAYER TIMES FOR CURRENT DAY ONTO WALLPAPER
 
 def draw_hijri(x_coord, y_coord):
 
-    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
-    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 200, y_coord + 80), test_clr)
-    draw.text((x_coord, y_coord), f'{hijri["day"]} {hijri["month"]["en"]} {hijri["year"]}', light_clr, font=FontHead)
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
+    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 240, y_coord + 50), test_clr)
+    draw.text((x_coord, y_coord), f'Date: {hijri["day"]} {hijri["month"]["en"]} \
+{hijri["year"]}{hijri["designation"]["abbreviated"]}\nWeekday: {hijri["weekday"]["en"]}'\
+, light_clr, font=FontHead)
         
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
     
+'''
+DRAW 3-DAY WEATHER FORECAST ONTO WALLPAPER
+'''
+
+def draw_forecast(x_coord, y_coord):
     
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
+    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 435, y_coord + 30), light_clr)
+    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 435, y_coord + 130), test_clr)
+    draw.text((x_coord, y_coord), f'Weather Forecast for {location["name"]}, \
+{location["country"]}', dark_clr, font=FontHead)
+    y_coord += 10
+    FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 19)
+    
+    for info in forecast:
+         draw.text((x_coord, y_coord + 30),f'{info["date"]}\n{info["day"]["condition"]["text"]}\
+\nMax: {info["day"]["maxtemp_c"]}°c\nMin: {info["day"]["mintemp_c"]}°c', light_clr, font=FontObj)
+         x_coord += 150
+    
+    DesktopImage.save(source_dir+r'\output\wallpaper.png')
+    
+
+
 '''
 PROGRAM RUNS FROM HERE
 '''
@@ -185,9 +211,13 @@ y_coord = draw_objectives()
 y_coord = draw_milestones(1480, y_coord)
 # Gathers prayer times for the day
 timings, hijri = prayer_api.prayer_timings()
+# Removes unneeded timings from dictionary
 timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),
-timings.pop("Sunset"),timings.pop("Midnight")   
+timings.pop("Sunset"),timings.pop("Midnight")
+# Draws the prayer times & hijri date on the desktop wallpaper
 draw_prayertimes(1600, y_coord)
+draw_hijri(5,5)
 
+location, forecast = weather_forecast("London")
+draw_forecast(1480, 700)
 
-draw_hijri(1600,800)
