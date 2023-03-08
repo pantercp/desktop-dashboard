@@ -195,13 +195,12 @@ PROGRAM RUNS FROM HERE
 source_dir = "C:\\Users\\Ronaldo\\OneDrive\\Python\\git\\ninetynine"
 today = date.today()
 datesave = today.strftime("%d-%m")
-
+file_name = r'\objectives.csv'
 DesktopImage = Image.open(source_dir+r'\background\template.png')
 draw = ImageDraw.Draw(DesktopImage)
 
 inspire_wallpaper()
 
-file_name = r'\objectives.csv'
 fontsFolder = 'C:\Windows\Fonts'
 dark_clr, light_clr = (23, 42, 58), (105, 209, 197)
 test_clr = (12, 21, 29)
@@ -221,3 +220,25 @@ draw_hijri(5,5)
 location, forecast = weather_forecast("London")
 draw_forecast(1480, 700)
 
+
+
+
+'''
+LEAVE THIS TO SOLVE LATER:
+    TRYING TO RETURN 3 MOST RECENTLY COMPLETED MILESTONES
+'''
+
+# recent_milestones = []
+# shortest = []
+# with open(source_dir+file_name, 'r', newline='') as read_obj:
+#     DictReader = csv.DictReader(read_obj)
+#     for row in DictReader:
+#         if row['Complete'] != 'FALSE':
+#             date = (row["Complete"])
+#             completed = datetime.strptime(date, "%d/%m/%Y")
+#             diff = today - completed.date()
+#             print(f'{row["Objective"]} was completed {diff.days} days ago')
+#             recent_milestones.append(row)
+#             if diff.days 
+            
+            
