@@ -74,7 +74,7 @@ def draw_objectives():
         # Draws objectives and deadline countdown onto wallpaper image
         obj_width, obj_height = get_text_dimensions(f'{row["Objective"]}', FontObj)
         days_width, days_height = get_text_dimensions(f'{countdown} Days', FontObj)
-        draw.rectangle((1475, y_coord, 1915, y_coord + 30), test_clr)    
+        draw.rectangle((1475, y_coord - 5, 1915, y_coord + 30), test_clr)    
         draw.text((1480, y_coord), f'{row["Objective"]}', light_clr, font=FontObj)
         draw.text((1910 - days_width, y_coord), f'{countdown} Days', light_clr, font=FontObj)
         y_coord += 30 # Moves coordinate for next objective to be written
@@ -120,7 +120,7 @@ def draw_milestones(x_coord, y_coord):
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
     for row in milestones:
         obj_width, obj_height = get_text_dimensions(row["Objective"], FontObj)
-        draw.rectangle((x_coord - 5, y_coord, 1915, y_coord + 30), test_clr)
+        draw.rectangle((x_coord - 5, y_coord - 5, 1915, y_coord + 30), test_clr)
         draw.text((x_coord, y_coord), row["Objective"], light_clr, font=FontObj)
         y_coord += 30
 
