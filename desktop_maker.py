@@ -180,7 +180,7 @@ def draw_forecast(x_coord, y_coord):
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 19)
     
     for info in forecast:
-         draw.text((x_coord, y_coord + 30),f'{info["date"]}\n{info["day"]["condition"]["text"]}\
+         draw.text((x_coord, y_coord + 30),f'{info["date"]}\n{info["day"]["condition"]["text"][0:14]}\
 \nMax: {info["day"]["maxtemp_c"]}°c\nMin: {info["day"]["mintemp_c"]}°c', light_clr, font=FontObj)
          x_coord += 150
     
