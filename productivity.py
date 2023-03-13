@@ -20,7 +20,7 @@ def append_dict_as_row(file_name, dict_of_elem, field_names):
     with open(file_name, 'a', newline='') as write_obj:
         # Create a writer object from csv module
         dict_writer = DictWriter(write_obj, fieldnames=field_names)
-        # Add dictionary as wor in the csv
+        # Add dictionary as row in the csv
         dict_writer.writerow(dict_of_elem)
 
 '''
@@ -29,30 +29,33 @@ REWRITE OBJECTIVES WITH A GIVEN LIST OF DICTIONARIES
 
 def rewrite_objectives(listdict):
 
+    # Open file in write mode
     with open(source_dir+file_name, 'w', newline='') as write_obj:
+        # Add keys for dict to top row of CSV
         field_names = ['ID','Date','Category','Objective','Deadline','Complete']
         dict_writer = DictWriter(write_obj, fieldnames=field_names)
         dw = csv.DictWriter(write_obj, delimiter=',', fieldnames=field_names)
         dw.writeheader()              
-        dict_writer.writerows(listdict)
+        dict_writer.writerows(listdict) # Add key's values to csv
         
 '''
 DISPLAYS CATEGORY OPTIONS AND RETURNS CHOICE
 '''
 
 def category_choice():
-# Adds existing categories without duplicates
+    
     category = []
 
     with open(source_dir+file_name) as read_obj:
-        DictReader = csv.DictReader(read_obj)
+        DictReader = csv.DictReader(read_obj) # Read csv as a dictionary
         for row in DictReader:
+            # Adds existing categories without duplicates
             if row['Category'] not in category:
                 category.append(row['Category'])
     
-    # Displays options with index number
     i = 0
     print()
+    # Displays options with index number
     for word in category:   
         print(i, word)
         i += 1
@@ -82,30 +85,29 @@ FUNCTION THAT TAKES INPUT FROM USER AND ADDS TO OBJECTIVES DATABASE
 
 def add_objectives():
 
-    # Adds New Objectives to the CSV Document
-    #lines, count = pd.read_csv(source_dir+file_name), 1
+    # Loop instigated for choosing to add an objective
     entry = str(input('\nDo you have an objective to add? (Y/N)\n>>> '))
-    # count = 1
     while entry.upper() == 'Y':
         
-        inp_category = category_choice()
+        inp_category = category_choice() # Returns category choice
         inp_obj = str(input('\nWhat is the objective?\n>>> '))
         inp_deadline = str(input('\nWhen do you need to complete it?\n>>> '))
+        # Keys for Dictionary in order to add it to existing csv structure
         field_names = ['ID','Date','Category','Objective','Deadline','Complete']
         
         # Need to get maximum value of ID
         with open(source_dir+file_name) as read_obj:
             DictReader = csv.DictReader(read_obj)
-            listdict = list(DictReader)
+            listdict = list(DictReader) # Create list of existing csv content
         max = 0
         for row in listdict:
             if int(row["ID"]) > int(max):
-                max = row["ID"]
+                max = row["ID"] # Gives the highest current ID in csv
         
         row_dict = {'ID':int(max)+1,'Date': dateformat,'Category': inp_category,'Objective':inp_obj,'Deadline':inp_deadline,'Complete':'FALSE'}
+        # Adds new objectives key values into csv
         append_dict_as_row(source_dir+file_name, row_dict, field_names)
         entry = 'N'
-        #count += 1
         entry = str(input('\nDo you have another objective to add (Y/N)?\n>>> '))
         
 '''
@@ -116,7 +118,7 @@ def completed_objectives():
 
     user_input = input('\nHave you completed any objectives? (Y/N)\n>>> ')
     while user_input.upper() == 'Y':
-        display_objectives() 
+        display_objectives() # Lists all currently outstanding objectives
         obj_id = str(input('\nWhich objective did you complete? (ID num)("cancel" to quit)\n>>> '))
     
         with open(source_dir+file_name, 'r', newline='') as read_obj:
@@ -124,7 +126,7 @@ def completed_objectives():
             for row in DictReader: # Don't think the order of this logic is correct
                 if row['ID'] == obj_id:
                     print()
-                    print(row)
+                    print(row) # Display selected objective
                     confirm = input('\nDid you complete this one?(Y/N)\n>>> ')
                     if confirm.upper() == 'Y':
                         # Collect list of dicts from CSV document
@@ -157,6 +159,7 @@ def collect_milestones():
     with open(source_dir+file_name, 'r', newline='') as read_obj:
         DictReader = csv.DictReader(read_obj)
         for row in DictReader:
+            # Adds milestones to list and ensures there are no duplicates
             if row['Complete'] != 'FALSE' and row not in milestones:
                 milestones.append(row)
 '''
@@ -168,6 +171,7 @@ def collect_objectives():
     with open(source_dir+file_name, 'r', newline='') as read_obj:
         DictReader = csv.DictReader(read_obj)
         for row in DictReader:
+            # Adds objectives to list and ensures there are no duplicates
             if row['Complete'] == 'FALSE' and row not in objectives:
                 objectives.append(row)
                 
@@ -180,6 +184,7 @@ def display_objectives():
     collect_objectives()
     print('\nYour current outstanding objectives are:\n')
     for row in objectives:
+        # Prints desired key values from outstanding objectives
         print(row['ID'],row['Category'],'-',row['Objective'])
     
 '''
@@ -191,6 +196,7 @@ def display_milestones():
     collect_milestones()
     print('\nYou have achieved the following milestones:\n')
     for row in milestones:
+        # Prints desired key values from current milestones
         print(row['ID'],row['Category'],'-',row['Objective'])
 
 '''
@@ -216,21 +222,22 @@ def delete_item():
             print()
             i = 0
             for row in DictReader:
-                print(i,row['Objective'])
+                print(i,row['Objective']) # Displays all objectives & milestones
                 i += 1
          
         with open(source_dir+file_name) as read_obj:
             DictReader = csv.DictReader(read_obj)
-            listdict = list(DictReader)
+            listdict = list(DictReader) # Preps a list of all obj & milestones
             
         user_input = input('\nWhich item would you like to delete? (Index num)\n>>> ')
         
-        while not user_input.isnumeric():
+        while not user_input.isnumeric(): # Ensure entry is numeric
             user_input = input('\nNot a number, please enter a valid ID number to delete\n>>> ')
             
-        while int(user_input) > len(listdict) or 0 > int(user_input):
+        while int(user_input) > len(listdict) or 0 > int(user_input): # Ensures valid index
             user_input = input('\nID number does not exist, please choose an item to delete\n>>> ')
             
+        # Confirmation of information selected for deleting
         confirm_input = input(f'\nAre you sure you want to delete: \n\n{listdict[int(user_input)]}\n\n(Y/N) >>> ')
         if confirm_input.upper() == 'Y':
             
@@ -247,7 +254,6 @@ def delete_item():
                 del milestones[dict_index] # Keeps display functions up to date
             
             del listdict[int(user_input)]
-
 
             # Overwrite the existing csv document 
             rewrite_objectives(listdict)
@@ -268,23 +274,22 @@ def change_item():
 
         with open(source_dir+file_name) as read_obj:
             DictReader = csv.DictReader(read_obj)
-            listdict = list(DictReader)
+            listdict = list(DictReader) # Preps list for changing csv content
             print()
         
         i = 0
-        for row in listdict:
+        for row in listdict: # Display choices for the change
             print(i,row['Category'],row['Objective'],row['Deadline'])
             i += 1
             
-        # Conditionals still required
         choice = input('\nWhich item would you like to change? (ID num)\n>>> ')
         if choice.isnumeric() and int(choice) <= len(listdict)-1:
-            print(f'\n{listdict[int(choice)]}\n')
+            print(f'\n{listdict[int(choice)]}\n') # Displays all info for choice
             for key in listdict[0]:
                 print(key)         
             category = input('\nWhich detail would you like to change? ("Q" to quit)\n>>> ')
         else:
-            print("\nNot a valid entry!\n")
+            print("\nNot a valid entry!\n") # Gives chance to retry non-valid choice
             confirm = input("Do you still wish to change an item? (Y/N)\n>>> ")
             if confirm.upper() == "Y":
                 change_item()
@@ -294,18 +299,20 @@ def change_item():
     
         if category.capitalize() in listdict[0].keys():
             print('\nWould you like to change:\n>>> ',end='')
+            # Display information of entry requested for change
             print(listdict[int(choice)][category.capitalize()])
             confirm = input('\n(Y/N) >>> ')
             if confirm.upper() == 'Y':
                 update = input('\nPlease enter new information\n>>> ')
+                # Add new information to the key's value
                 listdict[int(choice)][category.capitalize()] = update
                 confirm = input('\nWould you like to irreversibly update your list? (Y/N)\n>>> ')
                 if confirm.upper() == 'Y':
-                    rewrite_objectives(listdict)
+                    rewrite_objectives(listdict) # Rewrites csv with updated list
                     print(f'\nYour changes have been updated:\n\n{listdict[int(choice)]}')            
                     
                 else:
-                    print('\nDid not press "Y"...')
+                    print('\nDid not press "Y"...') # No confirmation, option to retry
                     change = input('\nWould you like to try again? (Y/N)\n>>> ')
                     if change.upper() == 'Y':
                         change_item()
@@ -343,6 +350,7 @@ milestones = []
 
 print('\nWelcome to your Productivity Dashboard!')
 
+#
 options = ["Display All","Display Objectives","Display Milestones","Add Objectives","Completed\
  Objectives", "Delete Item","Change Item"]
             
@@ -354,6 +362,8 @@ while repeat.upper() == "Y":
         print(i, option)
         i += 1
     choice = input(f'\nEnter an option 0 to {len(options)-1} or hit [ENTER] to continue\n>>> ')
+    
+    # Gives the user choice of running functions before continuing into the program
     if choice.isnumeric() and int(choice) <= len(options)-1:
         if int(choice) == 0:
             print("Option 0")
@@ -380,6 +390,11 @@ while repeat.upper() == "Y":
         print("\nContinuing to Inspiration Image generator...")
         repeat = "N"
 
+
+
+'''
+LIST OF FUNCTIONS FOR TESTING
+'''
 
 # display_all()
 # add_objectives()

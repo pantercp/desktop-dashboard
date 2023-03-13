@@ -5,9 +5,9 @@ Created on Sat Mar  4 19:14:42 2023
 @author: Ronaldo
 """
 
-import productivity
-import inspiration_image
-import desktop_maker
+import productivity # Handles personal objectives and milestones
+import inspiration_image # Creates unique image from different variables
+import desktop_maker # Creates unique wallpaper for the day
 import os
 import struct
 import ctypes
