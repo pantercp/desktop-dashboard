@@ -11,6 +11,8 @@ from datetime import datetime, date
 import csv
 import prayer_api
 from weather_api import weather_forecast
+from seeking_alpha_api import gme_price
+from crypto_api import crypto_prices
 
 
 '''
@@ -192,6 +194,23 @@ def draw_forecast(x_coord, y_coord):
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
     
 
+'''
+DRAW GAMESTOP PRICE ONTO WALLPAPER
+'''
+
+def draw_market(x_coord, y_coord):
+    
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 24)
+    FontBody = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
+    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 130, y_coord + 30), light_clr)
+    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 130, y_coord + 110), test_clr)
+    draw.text((x_coord, y_coord), 'Market', dark_clr, font=FontHead)
+    y_coord += 35
+    draw.text((x_coord, y_coord), f'{symbol}: ${price}\nBTC: ${btc}\nETH: ${eth}', light_clr, font=FontBody)
+    y_coord += 35
+    
+    DesktopImage.save(source_dir+r'\output\wallpaper.png')
+    
 
 '''
 PROGRAM RUNS FROM HERE
@@ -221,29 +240,13 @@ timings.pop("Sunset"),timings.pop("Midnight")
 # Draws the prayer times & hijri date on the desktop wallpaper
 draw_prayertimes(1600, y_coord)
 draw_hijri(5,5)
-
 location, forecast = weather_forecast("London")
-draw_forecast(1480, 700)
+draw_forecast(1480, 880)
+symbol, price = gme_price()
+btc, eth = crypto_prices()
+draw_market(1480, 700)
 
 
 
-
-'''
-LEAVE THIS TO SOLVE LATER:
-    TRYING TO RETURN 3 MOST RECENTLY COMPLETED MILESTONES
-'''
-
-# recent_milestones = []
-# shortest = []
-# with open(source_dir+file_name, 'r', newline='') as read_obj:
-#     DictReader = csv.DictReader(read_obj)
-#     for row in DictReader:
-#         if row['Complete'] != 'FALSE':
-#             date = (row["Complete"])
-#             completed = datetime.strptime(date, "%d/%m/%Y")
-#             diff = today - completed.date()
-#             print(f'{row["Objective"]} was completed {diff.days} days ago')
-#             recent_milestones.append(row)
-#             if diff.days 
             
             
