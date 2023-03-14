@@ -123,7 +123,7 @@ def completed_objectives():
     
         with open(source_dir+file_name, 'r', newline='') as read_obj:
             DictReader = csv.DictReader(read_obj)
-            for row in DictReader: # Don't think the order of this logic is correct
+            for row in DictReader:
                 if row['ID'] == obj_id:
                     print()
                     print(row) # Display selected objective
@@ -132,7 +132,7 @@ def completed_objectives():
                         # Collect list of dicts from CSV document
                         with open(source_dir+file_name) as read_obj:
                             DictReader = csv.DictReader(read_obj)
-                            listdict = list(DictReader)
+                            listdict = list(DictReader) # Make list of dicts for overwriting
                             # Enter information for updating document
                             completed = str(input('\nWhat date was it completed? (%D/%M/%Y)\n>>> '))
                             # Locates the dictionary in objectives list and deletes it to keep the
@@ -140,11 +140,20 @@ def completed_objectives():
                             dict_index = next((index for (index, d) in enumerate(objectives) \
                                                if d["Objective"] == f'{row["Objective"]}'), None)
                             del objectives[dict_index]
-                            listdict[int(obj_id)-1]['Complete'] = completed
-                        # Rewrites objectives with updated information
-                        rewrite_objectives(listdict)            
-                        print('\nCongratulations! This objective has become a milestone!')
-                        user_input = input('\nHave you completed any other objectives? (Y/N)\n>>> ')
+                            
+                            # Find existing objective in list dict and update value
+                            for i, d in enumerate(listdict): # Go through list of dicts
+                                if d.get("ID") == row["ID"]: # Find matching ID
+                                    print(f"The index of the dictionary with ID {row['ID']} is {i}")
+                                    listdict[i]["Complete"] = completed
+                                    # Rewrites objectives with updated information
+                                    rewrite_objectives(listdict)            
+                                    print('\nCongratulations! This objective has become a milestone!')
+                                    user_input = input('\nHave you completed any other objectives? (Y/N)\n>>> ')
+                                    break
+                            else:
+                                print("Not found index of dictionaries ID")
+
                 elif obj_id.lower() == 'cancel':
                     user_input = 'N'
                 # else:
