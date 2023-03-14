@@ -108,20 +108,25 @@ def draw_milestones(x_coord, y_coord):
         DictReader = csv.DictReader(read_obj)
         for row in DictReader:
             if row['Complete'] != 'FALSE':
-                milestones.append(row)
-    
-    y_coord += 20
+                milestones.append(row) # Appends all completed objectives
+ 
+    for row in milestones: # Change date format to sort by most recently completed
+        row['Complete'] = datetime.strptime(row['Complete'], '%d/%m/%Y').date()
+    # Sort by most recent dates
+    recent_milestones = sorted(milestones, key=lambda k: k['Complete'], reverse=True)
+
+    y_coord += 20 # Move text coordinates and rectangle down from Objectives
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
     draw.rectangle((x_coord - 5, y_coord-5, x_coord + 435, y_coord + 35), light_clr)
     draw.text((x_coord, y_coord), "Milestones", dark_clr, font=FontHead)
-    y_coord += 40
+    y_coord += 40 # Move y coord down from heading
     
     # Font size for the Objectives
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
-    for row in milestones:
-        obj_width, obj_height = get_text_dimensions(row["Objective"], FontObj)
+    for i in range(3):
+        obj_width, obj_height = get_text_dimensions(recent_milestones[i]["Objective"], FontObj)
         draw.rectangle((x_coord - 5, y_coord - 5, 1915, y_coord + 30), test_clr)
-        draw.text((x_coord, y_coord), row["Objective"], light_clr, font=FontObj)
+        draw.text((x_coord, y_coord), recent_milestones[i]["Objective"], light_clr, font=FontObj)
         y_coord += 30
 
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
