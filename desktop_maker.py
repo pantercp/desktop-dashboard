@@ -13,6 +13,7 @@ import prayer_api
 from weather_api import weather_forecast
 from seeking_alpha_api import gme_price
 from crypto_api import crypto_prices
+from football_api import next_fixture
 
 
 '''
@@ -62,7 +63,7 @@ def draw_objectives():
             if row['Complete'] == 'FALSE':
                 objectives.append(row)
     
-    y_coord = 20
+    y_coord = 400
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
     draw.rectangle((1475, y_coord-5, 1915, y_coord + 35), light_clr)
     draw.text((1480, y_coord), "Objectives", dark_clr, font=FontHead)
@@ -145,8 +146,8 @@ def draw_prayertimes(x_coord, y_coord):
     y_coord += 20
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
     draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 200, y_coord + 30), light_clr)
-    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 200, y_coord + 210), test_clr)
-    draw.text((x_coord, y_coord), "Prayer Times", dark_clr, font=FontHead)
+    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 200, y_coord + 225), test_clr)
+    draw.text((x_coord + 15, y_coord), "Prayer Times", dark_clr, font=FontHead)
     y_coord += 35
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
 
@@ -200,16 +201,36 @@ DRAW GAMESTOP PRICE ONTO WALLPAPER
 
 def draw_market(x_coord, y_coord):
     
-    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 24)
-    FontBody = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 22)
+    FontBody = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 18)
     draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 130, y_coord + 30), light_clr)
-    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 130, y_coord + 110), test_clr)
-    draw.text((x_coord, y_coord), 'Market', dark_clr, font=FontHead)
+    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 130, y_coord + 100), test_clr)
+    draw.text((x_coord + 30, y_coord), 'Market', dark_clr, font=FontHead)
     y_coord += 35
-    draw.text((x_coord, y_coord), f'{symbol}: ${price}\nBTC: ${btc}\nETH: ${eth}', light_clr, font=FontBody)
+    draw.text((x_coord + 10, y_coord), f'{symbol}: ${price}\nBTC: ${btc}\nETH: ${eth}', light_clr, font=FontBody)
     y_coord += 35
     
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
+    
+    
+'''
+DRAW SHEFFIELD UNITED FIXTURE DETAILS
+'''
+
+def draw_fixtures(x_coord, y_coord):
+    
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 22)
+    FontBody = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 18)
+    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 130, y_coord + 30), light_clr)
+    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 130, y_coord + 100), test_clr)
+    draw.text((x_coord + 7, y_coord), 'The Blades', dark_clr, font=FontHead)
+    y_coord += 35
+    draw.text((x_coord, y_coord), f'  {opponent["date"]}\n {opponent["name"][0:12]} ({opponent["venue"][0]})\
+\n      {opponent["form"]}', light_clr, font=FontBody)
+    y_coord += 35
+    
+    DesktopImage.save(source_dir+r'\output\wallpaper.png')
+    
     
 
 '''
@@ -238,14 +259,18 @@ timings, hijri = prayer_api.prayer_timings()
 timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),
 timings.pop("Sunset"),timings.pop("Midnight")
 # Draws the prayer times & hijri date on the desktop wallpaper
-draw_prayertimes(1600, y_coord)
+draw_prayertimes(1500, 145)
 draw_hijri(5,5)
+# Get the weather forecast by City
 location, forecast = weather_forecast("London")
-draw_forecast(1480, 880)
+draw_forecast(1480, 10)
+# Get market prices for interested holdings
 symbol, price = gme_price()
 btc, eth = crypto_prices()
-draw_market(1480, 700)
-
+draw_market(1750, 165)
+# Get next fixture details for SUFC
+opponent = next_fixture()
+draw_fixtures(1750, 280)
 
 
             

@@ -16,6 +16,8 @@ import re
 
 def crypto_prices():
 
+    print("Initiating API for crypto prices\n")
+    
     url = "https://investing-cryptocurrency-markets.p.rapidapi.com/coins/list-pairs"
     
     querystring = {"time_utc_offset":"28800","lang_ID":"1"}
@@ -26,7 +28,7 @@ def crypto_prices():
     }
     
     response = requests.request("GET", url, headers=headers, params=querystring)
-    
+    print(f'Response Status: {response.status_code}\n')
     data = response.json()
     
     pairs_data = data["data"][0]["screen_data"]["pairs_data"]
@@ -45,6 +47,8 @@ def crypto_prices():
             eth_price_string_1 = re.sub(",", "", eth_price_string)
             eth_price = int(float(eth_price_string_1))
             
-    return btc_price, eth_price
+    print(f'Latest Market Prices:\nBTC: ${btc_price}\nETH: ${eth_price}\n')
             
+    return btc_price, eth_price
+ 
         

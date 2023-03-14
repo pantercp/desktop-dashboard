@@ -9,8 +9,8 @@ import requests
 
 def weather_forecast(city):
 
+   print("\nInitiating Weather API\n")
    url = "https://weatherapi-com.p.rapidapi.com/forecast.json"
-    
    querystring = {"q":city,"days":"3"}
     
    headers = {
@@ -19,7 +19,8 @@ def weather_forecast(city):
     }
     
    response = requests.request("GET", url, headers=headers, params=querystring)
-    
+   print(f'Response Status: {response.status_code}')
+
    data = response.json()
     
    forecast = data["forecast"]["forecastday"]
