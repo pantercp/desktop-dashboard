@@ -1,3 +1,4 @@
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -29,13 +30,14 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-       <ul>
+          <li>
+      <a href="#stages-of-the-program">Stages Of The Project</a>
+             <ul>
         <li><a href="#inspirational-image">Inspirational Image</a></li>
       </ul>
              <ul>
         <li><a href="#personal-dashboard">Personal Dashboard</a></li>
       </ul>
-    </li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -49,6 +51,10 @@ NinetyNine creates a completely unique desktop wallpaper every day to keep you i
 <img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-1.jpg" alt="Logo" width="100%" height="100%">
 
 <p align="center">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- STAGES OF THE PROGRAM -->
+
+## Stages Of The Program
 
 ### Inspirational Image
 
