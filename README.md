@@ -41,8 +41,6 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -57,6 +55,8 @@ NinetyNine creates a completely unique desktop wallpaper every day to keep you i
 This part of the program solely creates the image in the centre of the wallpaper and ensures a completely unique image every time you run it. The program accesses two csv files and a folder of images. One is a list of 99 different things to be grateful for and 99 affirmations, whilst the other csv is comprised of the 99 names of Allah along with a translation for each name. *Note these variables are not limited to 99.
 
 Every time the program runs it uses the **choice** module to randomly choose: an image, affirmation, something to be grateful for and a name of Allah. It then compiles these choices and creates a completely unique image for inspiration.
+
+<img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-2.jpg" alt="Logo" width="33%" height="33%"> <img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-3.jpg" alt="Logo" width="33%" height="33%"> <img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-4.jpg" alt="Logo" width="33%" height="33%">
 
 ### Personal Dashboard
 
