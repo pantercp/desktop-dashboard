@@ -29,9 +29,6 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
        <ul>
         <li><a href="#inspirational-image">Inspirational Image</a></li>
       </ul>
@@ -49,8 +46,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 NinetyNine creates a completely unique desktop wallpaper every day to keep you inspired and is comprised of an inspirational image in the centre, with space to the left side to organise your desktop shortcuts and temporary files. To the right side of the image there is a space to be utilised for what I refer to as your personal dashboard.
+
+<img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-1.jpg" alt="Logo" width="100%" height="100%">
 
 <p align="center">(<a href="#readme-top">back to top</a>)</p>
 
