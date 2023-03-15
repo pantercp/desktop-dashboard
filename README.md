@@ -31,7 +31,10 @@
     <li>
       <a href="#about-the-project">About The Project</a>
           <li>
-      <a href="#stages-of-the-program">Stages Of The Project</a>
+      <a href="#stages-of-the-project">Stages Of The Project</a>
+                   <ul>
+        <li><a href="#template-wallpaper">Template Wallpaper</a></li>
+      </ul>
              <ul>
         <li><a href="#inspirational-image">Inspirational Image</a></li>
       </ul>
@@ -55,6 +58,13 @@ NinetyNine creates a completely unique desktop wallpaper every day to keep you i
 <!-- STAGES OF THE PROGRAM -->
 
 ## Stages Of The Program
+
+### Template Wallpaper
+
+To give the program a wallpaper image to work from I created a 1920x1080 image in Canva, which gives the  desired background image and defines space on the left hand side for placing desktop shortcuts and files.
+
+<img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/template.jpg" alt="Logo" width="50%" height="50%">
+
 
 ### Inspirational Image
 
