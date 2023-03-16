@@ -1,4 +1,4 @@
-
+<a name="readme-top"></a>
 
 <!-- PROJECT LOGO -->
 <br />
@@ -103,7 +103,9 @@ The personal information is more for the individuals interests and is powered us
 
 ### Wallpaper Update
 
-Now that the days wallpaper has been created the final stage is where the program changes the desktop wallpaper to the image found in the **output** folder.
+Now that the days wallpaper has been created the final stage is where the program changes the desktop wallpaper to the image found in the **output** folder. Voila, you have a new desktop wallpaper (like image below) designed specifically to organise and inspire your day.
+
+<img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-7.jpg" alt="Logo" width="100%" height="100%">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
