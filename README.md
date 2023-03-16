@@ -1,4 +1,5 @@
 
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -31,15 +32,18 @@
     <li>
       <a href="#about-the-project">About The Project</a>
           <li>
-      <a href="#stages-of-the-project">Stages Of The Project</a>
-                   <ul>
-        <li><a href="#template-wallpaper">Template Wallpaper</a></li>
+      <a href="#stages-of-the-program">Stages Of The Program</a>
+                         <ul>
+        <li><a href="#productivity-dashboard">Productivity Dashboard</a></li>
       </ul>
              <ul>
         <li><a href="#inspirational-image">Inspirational Image</a></li>
       </ul>
              <ul>
-        <li><a href="#personal-dashboard">Personal Dashboard</a></li>
+        <li><a href="#desktop-maker">Desktop Maker</a></li>
+      </ul>
+                   <ul>
+        <li><a href="#wallpaper-update">Wallpaper Update</a></li>
       </ul>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -59,12 +63,17 @@ NinetyNine creates a completely unique desktop wallpaper every day to keep you i
 
 ## Stages Of The Program
 
-### Template Wallpaper
+Once the program is correctly installed and configured, running the program goes through the following sequence.
 
-To give the program a wallpaper image to work from I created a 1920x1080 image in Canva, which gives the  desired background image and defines space on the left hand side for placing desktop shortcuts and files.
+### Productivity Dashboard
 
-<img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/template.jpg" alt="Logo" width="50%" height="50%">
+The program first enters the "Productivity Dashboard" which enables you to manage your personal objectives. Here you can view, add, edit, delete and complete any personal objectives that you have. The objectives are all stored within a csv file which records the following for each of them: Date, Category, Objective, Deadline, Complete (date).
 
+Adding an objective -  Records todays date automatically, whilst Category, Objective and Deadline are all requested user inputs, and Complete is automatically set to "FALSE".
+
+Completing an objective - This function asks you to define which objective you have completed and to then enter the completion date. Once an Objective has a complete date it is treated as a Milestone.
+
+At the later stage - **Desktop Maker**, the objectives csv file is then used to access this information and then draws these objectives and milestones onto the desktop wallpaper.
 
 ### Inspirational Image
 
@@ -74,9 +83,23 @@ Every time the program runs it uses the **choice** module to randomly choose: an
 
 <img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-2.jpg" alt="Logo" width="30%" height="30%"> <img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-3.jpg" alt="Logo" width="30%" height="30%"> <img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-4.jpg" alt="Logo" width="30%" height="30%">
 
-### Personal Dashboard
+### Desktop Maker
 
-This refers to the part of the wallpaper which is to the right of the centre image. It includes a space for productivity (objectives and milestones) and desired local information (using an assortment of api's).
+To give the program a wallpaper image to work from I created a 1920x1080 image in Canva, which gives the desired background image and defines space on the left hand side for placing desktop shortcuts and files.
+
+<img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/template.jpg" alt="Logo" width="50%" height="50%">
+
+At this point the program then retrieves the image created from **Inspirational Image** and pastes it onto the template wallpaper (shown above).  
+
+After this the **Desktop Maker** draws all of the information shown to the right of the centre image.  Which is split into two main sections - personal and productivity. 
+
+The productivity information is found in objectives.csv, it enters this file and draws all of the outstanding Objectives onto the template wallpaper along with the amount of days remaining until the deadline for completion. Then the three most recently completed Objectives are then drawn on the wallpaper as Milestones.
+
+The personal information is more for the individuals interests and is powered using the appropriate api's for the desired content. My version was designed to show the days Prayer Times, Local Weather, Market Prices and my football team's next Fixture.
+
+### Wallpaper Update
+
+Now that the days wallpaper has been created the final stage is where the program changes the desktop wallpaper to the image found in the **output** folder.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
