@@ -113,7 +113,7 @@ Now that the days wallpaper has been created the final stage is where the progra
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Christian Panter - https://www.linkedin.com/in/christianpanter/ - cjpixeluk@gmail.com
 
 Project Link: [https://github.com/pantercp/desktop-dashboard.git](https://github.com/github_username/repo_name)
 
@@ -124,8 +124,8 @@ Project Link: [https://github.com/pantercp/desktop-dashboard.git](https://github
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []() CSV book
-* []() Python course
+* []() Automate the Boring Stuff with Python: Practical Programming for Total Beginners - Book by Al Sweigart
+* []() Python for Absolute Beginners | Python Beginner to Pro 2023 - Udemy Course
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
