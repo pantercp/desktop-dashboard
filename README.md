@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/pantercp">
     <img src="https://github.com/pantercp/Personal_Portfolio_Website/blob/master/images/logo2.png" alt="Logo" width="80" height="80">
   </a>
 
