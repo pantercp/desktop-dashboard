@@ -45,6 +45,20 @@
                    <ul>
         <li><a href="#wallpaper-update">Wallpaper Update</a></li>
       </ul>
+          <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+        <li>
+      <a href="#personalisation">Personalisation</a>
+      <ul>
+        <li><a href="#images">Images</a></li>
+        <li><a href="#inspiration">Inspiration</a></li>
+      </ul>
+    </li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
