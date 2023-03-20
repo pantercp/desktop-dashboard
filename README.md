@@ -123,6 +123,15 @@ Now that the days wallpaper has been created the final stage is where the progra
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Getting Started
+
+### Prerequisites
+### Installation
+
+## Personalisation
+
+### Images
+### Inspiration
 
 <!-- CONTACT -->
 ## Contact
