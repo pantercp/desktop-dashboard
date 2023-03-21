@@ -125,13 +125,29 @@ Now that the days wallpaper has been created the final stage is where the progra
 
 ## Getting Started
 
+Clone this repository onto your machine, install the requirements.txt (<a href="#installation">See Installation</a>) and add a selection of 1080x1080px images (<a href="#images">See Images</a>) for personalisation. Also visit RapidAPI.com and create an account in order to get an API key so that the personal dashboard side of the wallpaper can gather the requested data.
+
 ### Prerequisites
+
+In order to run this program you need to have Python 3 installed. The version I use to run this is: Python 3.10.8
+
+This program has be built using Windows 11 and therefore the part of the program that changes the desktop wallpaper may require changing for a different operating system.
+
 ### Installation
+
+All the modules required to run this program which aren't included in Python 3.10.8 can be found in requirements.txt
+
+To install the same versions of all of these modules, activate your desired virtual environment and run ```pip install -r requirements.txt```
 
 ## Personalisation
 
 ### Images
+
+The image for the centre of the Desktop Wallpaper is chosen at random from the **images** folder. For this program to work at its best please add your desired images to the folder in a 1080x1080px format. The more images you add the better as the chosen images will be less repetitive. For my version I use a selection of 99 images.
+
 ### Inspiration
+
+This refers to the list of affirmations and things to be grateful for which can be found within **inspire.csv** file. Here you can add, delete or change any affirmations or things to be grateful for and the program will continue to select a random one every time it runs.
 
 <!-- CONTACT -->
 ## Contact
