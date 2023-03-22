@@ -18,8 +18,8 @@ def prayer_timings():
     dateformat = today.strftime("%d-%m-%Y")
     month = today.strftime("%m")
     year = today.strftime("%Y")
-    city = "London"
-    country = "United Kingdom"
+    city = "Valletta"
+    country = "Malta"
     # Confirm to user date and location for prayer times
     print(f'Getting Prayer Times for {dateformat} in {city}, {country}...\n ')
     # Submit api request with desired details
