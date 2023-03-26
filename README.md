@@ -137,7 +137,7 @@ This program has be built using Windows 11 and therefore the part of the program
 
 All the modules required to run this program which aren't included in Python 3.10.8 can be found in requirements.txt
 
-To install the same versions of all of these modules, activate your desired virtual environment and run ```pip install -r requirements.txt```
+To install the same versions of all of these modules, activate your desired virtual environment, enter the diretory on your computer where the cloned repository is saved and run ```pip install -r requirements.txt```
 
 ## Personalisation
 
