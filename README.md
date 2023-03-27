@@ -137,7 +137,7 @@ This program has be built using Windows 11 and therefore the part of the program
 
 All the modules required to run this program which aren't included in Python 3.10.8 can be found in requirements.txt
 
-To install the same versions of all of these modules, activate your desired virtual environment and run ```pip install -r requirements.txt```
+To install the same versions of all of these modules, activate your desired virtual environment, enter the diretory on your computer where the cloned repository is saved and run ```pip install -r requirements.txt```
 
 ## Personalisation
 
@@ -153,6 +153,7 @@ This refers to the list of affirmations and things to be grateful for which can 
 ## Contact
 
 Christian Panter - https://www.linkedin.com/in/christianpanter/ - cjpixeluk@gmail.com
+Freelance Website - https://pantercp.github.io/Personal_Portfolio_Website/
 
 Project Link: [https://github.com/pantercp/desktop-dashboard.git](https://github.com/github_username/repo_name)
 
