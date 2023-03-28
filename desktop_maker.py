@@ -14,6 +14,7 @@ from weather_api import weather_forecast
 from seeking_alpha_api import gme_price
 from crypto_api import crypto_prices
 from football_api import next_fixture
+from insta_api import instagram_info
 
 
 '''
@@ -63,7 +64,7 @@ def draw_objectives():
             if row['Complete'] == 'FALSE':
                 objectives.append(row)
     
-    y_coord = 400
+    y_coord = 605
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
     draw.rectangle((1475, y_coord-5, 1915, y_coord + 35), light_clr)
     draw.text((1480, y_coord), "Objectives", dark_clr, font=FontHead)
@@ -143,10 +144,9 @@ DRAW PRAYER TIMES FOR CURRENT DAY ONTO WALLPAPER
 
 def draw_prayertimes(x_coord, y_coord):
 
-    y_coord += 20
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
     draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 200, y_coord + 30), light_clr)
-    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 200, y_coord + 225), test_clr)
+    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 200, y_coord + 215), test_clr)
     draw.text((x_coord + 15, y_coord), "Prayer Times", dark_clr, font=FontHead)
     y_coord += 35
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
@@ -231,7 +231,43 @@ def draw_fixtures(x_coord, y_coord):
     
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
     
+
+'''
+DRAW BUDGET BACKPACKERS IG STATS
+'''
+
+def draw_instagram(x_coord, y_coord):
     
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 22)
+    FontBody = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 22)
+    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 200, y_coord + 30), light_clr)
+    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 200, y_coord + 85), test_clr)
+    draw.text((x_coord, y_coord), instagram["account"], dark_clr, font=FontHead)
+    y_coord += 35
+    draw.text((x_coord + 25, y_coord), f' Following: {instagram["following"]}\
+\nFollowers: {instagram["followers"]}', light_clr, font=FontBody)
+    
+    DesktopImage.save(source_dir+r'\output\wallpaper.png')
+    
+
+'''
+DRAW DASHBOARD TITLES
+'''
+
+def draw_titles(x_coord_1, y_coord_1, x_coord_2, y_coord_2):
+    
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 32)
+    draw.rectangle((x_coord_1 - 5, y_coord_1 - 5, x_coord_1 + 300, y_coord_1 + 35), test_clr)
+    draw.rectangle((x_coord_2 - 5, y_coord_2 -5, x_coord_2 + 335, y_coord_2 + 35), test_clr)
+    draw.text((x_coord_1, y_coord_1 - 2), "Personal Dashboard", light_clr, font=FontHead)
+    draw.text((x_coord_2, y_coord_2 - 2), "Productivity Dashboard", light_clr, font=FontHead)
+    
+    DesktopImage.save(source_dir+r'\output\wallpaper.png')
+    
+    
+
+
+
 
 '''
 PROGRAM RUNS FROM HERE
@@ -259,19 +295,24 @@ timings, hijri = prayer_api.prayer_timings()
 timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),
 timings.pop("Sunset"),timings.pop("Midnight")
 # Draws the prayer times & hijri date on the desktop wallpaper
-draw_prayertimes(1500, 145)
+draw_prayertimes(1500, 205)
 draw_hijri(5,5)
 # Get the weather forecast by City
 location, forecast = weather_forecast("Valletta")
-draw_forecast(1480, 10)
+draw_forecast(1480, 60)
 # Get market prices for interested holdings
 symbol, price = gme_price()
 btc, eth = crypto_prices()
-draw_market(1750, 165)
+draw_market(1750, 205)
 # Get next fixture details for SUFC
 opponent = next_fixture()
-draw_fixtures(1750, 280)
+draw_fixtures(1750, 320)
 
+instagram = instagram_info("budget.backpackers")
+# instagram = {"account": "Budget Backpackers", "followers": 3359, "following": 996, "likes": 4272}
+draw_instagram(1500, 450)
+
+draw_titles(1555, 10, 1535, 555)
 
             
             
