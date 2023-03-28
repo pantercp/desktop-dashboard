@@ -20,6 +20,8 @@ RETURN TEAMS LAST FIVE RESULTS
 '''
 
 def get_form(team_id):
+    
+    print("Gathering Opponents Data...\n")
 
     url = "https://api-football-v1.p.rapidapi.com/v3/teams/statistics"
     
@@ -31,10 +33,12 @@ def get_form(team_id):
     }
     
     response = requests.request("GET", url, headers=headers, params=querystring)
-    
+    print(f'Response Status: {response.status_code}\n')
+
     data = response.json()
     
     form = data["response"]["form"][-5::]
+    print(f'Opponents Last Five Results:\n{form}')
 
     return form
 
@@ -44,6 +48,8 @@ FIXTURES BY TEAM ID
 '''
 
 def next_fixture():
+
+    print("Initiating Football API...\n")
 
     url = "https://api-football-v1.p.rapidapi.com/v3/fixtures"
     

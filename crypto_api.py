@@ -16,7 +16,7 @@ import re
 
 def crypto_prices():
 
-    print("Initiating API for crypto prices\n")
+    print("Initiating API for crypto prices...\n")
     
     url = "https://investing-cryptocurrency-markets.p.rapidapi.com/coins/list-pairs"
     

@@ -9,6 +9,8 @@ import requests
 
 def instagram_info(account):
 
+    print(f'Initiating Instagram for {account} info...\n')
+
     url = "https://instagram28.p.rapidapi.com/user_info"
     
     querystring = {"user_name":account}
@@ -19,15 +21,14 @@ def instagram_info(account):
     }
     
     response = requests.request("GET", url, headers=headers, params=querystring)
-    
+    print(f'Response Status: {response.status_code}\n')
+
     data = response.json()
-    
     
     account = data["data"]["user"]
     posts = data["data"]["user"]["edge_owner_to_timeline_media"]["edges"]
     followers = account["edge_followed_by"]["count"]
     following = account["edge_follow"]["count"]
-    
     
     likes = 0
     for post in posts:

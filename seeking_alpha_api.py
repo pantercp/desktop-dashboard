@@ -13,6 +13,9 @@ S&P: 587766
 import requests
 
 def gme_price():
+    
+    print("Initiating API for market prices...\n")
+
 
     url = "https://seeking-alpha.p.rapidapi.com/market/get-realtime-quotes"
     
@@ -24,10 +27,14 @@ def gme_price():
     }
     
     response = requests.request("GET", url, headers=headers, params=querystring)
-    
+    print(f'Response Status: {response.status_code}\n')
+
     data = response.json()
     
     symbol = data["real_time_quotes"][0]["symbol"]
     price = data["real_time_quotes"][0]["last"]
+
+    print(f'Latest Market Prices:\n{symbol}: ${price}\n')
+
 
     return symbol, price

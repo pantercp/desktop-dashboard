@@ -9,7 +9,7 @@ import requests
 
 def weather_forecast(city):
 
-   print("\nInitiating Weather API\n")
+   print("\nInitiating Weather API...\n")
    url = "https://weatherapi-com.p.rapidapi.com/forecast.json"
    querystring = {"q":city,"days":"3"}
     
