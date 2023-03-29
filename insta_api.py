@@ -9,7 +9,7 @@ import requests
 
 def instagram_info(account):
 
-    print(f'Initiating Instagram for {account} info...\n')
+    print('\nInitiating Instagram API...\n')
 
     url = "https://instagram28.p.rapidapi.com/user_info"
     
