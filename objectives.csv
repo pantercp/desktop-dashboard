@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ID,Date,Category,Objective,Deadline,Complete
 1,20/10/2022,Language,Complete Arabic Alphabet on Duo Lingo,01/01/2023,01/01/2023
 3,15/07/2022,Python,Finish Udemy Python Course (100%),20/03/2023,13/03/2023
@@ -6,20 +5,11 @@ ID,Date,Category,Objective,Deadline,Complete
 7,01/11/2022,Health,Go to gym 16 times in November,01/12/2022,01/12/2022
 9,02/11/2022,WebDev,Complete 70% of the Udemy Course,16/04/2023,FALSE
 10,03/11/2022,Employment,Contribute to git on 21 days of November,01/12/2022,01/12/2022
-12,21/02/2023,Health,Hold an L-Lift for 5s,13/04/2023,FALSE
-14,04/03/2023,Python,Finish NinetyNine project with ReadMe.txt,13/04/2023,FALSE
+13,15/03/2023,WebDev,Update Tinchy homepage for February,24/03/2023,24/03/2023
+14,04/03/2023,Python,Finish NinetyNine project with ReadMe.txt,13/04/2023,25/03/2023
 15,11/03/2023,Python,Make first contribution to GitHub,16/03/2023,FALSE
-16,11/03/2023,Employment,Offer HTML freelance work online,25/03/2023,FALSE
-=======
-ID,Date,Category,Objective,Deadline,Complete
-1,20/10/2022,Language,Complete Arabic Alphabet on Duo Lingo,01/01/2023,01/01/2023
-3,15/07/2022,Python,Finish Udemy Python Course (100%),20/03/2023,13/03/2023
-6,05/07/2022,Chess,Get to a ranking of 1300,01/01/2023,20/08/2022
-7,01/11/2022,Health,Go to gym 16 times in November,01/12/2022,01/12/2022
-9,02/11/2022,WebDev,Complete 70% of the Udemy Course,16/04/2023,FALSE
-10,03/11/2022,Employment,Contribute to git on 21 days of November,01/12/2022,01/12/2022
-12,21/02/2023,Health,Hold an L-Lift for 5s,13/04/2023,FALSE
-14,04/03/2023,Python,Finish NinetyNine project with ReadMe.txt,13/04/2023,FALSE
-15,11/03/2023,Python,Make first contribution to GitHub,16/03/2023,FALSE
-16,11/03/2023,Employment,Offer HTML freelance work online,25/03/2023,FALSE
->>>>>>> 7b0d2f5f8b5625c2b55aa2f3a0c1bc862a0e9e94
+17,20/03/2023,WebDev,Create amini archives worpress site,10/04/2023,FALSE
+18,21/03/2023,Knowledge,Finish Destiny Disrupted - Tamim Ansary,20/04/2023,FALSE
+19,24/03/2023,Language,Finish unit 10 of Arabic on Duo,20/04/2023,FALSE
+20,24/03/2023,WebDev,Make CJPixel.uk active portfolio site,04/04/2023,FALSE
+21,27/03/2023,Budget Backpackers,"Reach 3,400 followers on IG",30/04/2023,FALSE
