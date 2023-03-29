@@ -10,6 +10,7 @@ GME: 1290
 S&P: 587766
 '''
 
+from config import rapid_api_key
 import requests
 
 def gme_price():
@@ -22,7 +23,7 @@ def gme_price():
     querystring = {"sa_ids":"1290"}
     
     headers = {
-     	"X-RapidAPI-Key": "89a5450d92msh670a1a1da320cd1p1ce2b8jsn907bf0c5798c",
+     	"X-RapidAPI-Key": rapid_api_key,
      	"X-RapidAPI-Host": "seeking-alpha.p.rapidapi.com"
     }
     

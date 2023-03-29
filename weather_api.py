@@ -5,6 +5,7 @@ Created on Tue Mar  7 16:01:50 2023
 @author: Ronaldo
 """
 
+from config import rapid_api_key
 import requests
 
 def weather_forecast(city):
@@ -14,7 +15,7 @@ def weather_forecast(city):
    querystring = {"q":city,"days":"3"}
     
    headers = {
-    	"X-RapidAPI-Key": "89a5450d92msh670a1a1da320cd1p1ce2b8jsn907bf0c5798c",
+    	"X-RapidAPI-Key": rapid_api_key,
     	"X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
     }
     

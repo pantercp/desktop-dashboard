@@ -10,6 +10,7 @@ Bitcoin USD Pair ID = 945629
 Ethereum USD Pair ID = 997650
 '''
 
+from config import rapid_api_key
 import requests
 import re
 
@@ -23,7 +24,7 @@ def crypto_prices():
     querystring = {"time_utc_offset":"28800","lang_ID":"1"}
     
     headers = {
-    	"X-RapidAPI-Key": "89a5450d92msh670a1a1da320cd1p1ce2b8jsn907bf0c5798c",
+    	"X-RapidAPI-Key": rapid_api_key,
     	"X-RapidAPI-Host": "investing-cryptocurrency-markets.p.rapidapi.com"
     }
     

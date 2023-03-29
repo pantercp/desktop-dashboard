@@ -11,6 +11,7 @@ Sheffield United ID: 62
 Bramall Lane: 581
 '''
 
+from config import rapid_api_key
 import requests
 from datetime import date, datetime
 
@@ -28,7 +29,7 @@ def get_form(team_id):
     querystring = {"league":"40","season":"2022","team":team_id}
     
     headers = {
-    	"X-RapidAPI-Key": "89a5450d92msh670a1a1da320cd1p1ce2b8jsn907bf0c5798c",
+    	"X-RapidAPI-Key": rapid_api_key,
     	"X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
     }
     

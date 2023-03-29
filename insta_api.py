@@ -5,18 +5,19 @@ Created on Mon Mar 27 16:34:06 2023
 @author: Ronaldo
 """
 
+from config import rapid_api_key
 import requests
 
 def instagram_info(account):
 
-    print(f'Initiating Instagram for {account} info...\n')
+    print(f'\nInitiating Instagram api...\n')
 
     url = "https://instagram28.p.rapidapi.com/user_info"
     
     querystring = {"user_name":account}
     
     headers = {
-    	"X-RapidAPI-Key": "89a5450d92msh670a1a1da320cd1p1ce2b8jsn907bf0c5798c",
+    	"X-RapidAPI-Key": rapid_api_key,
     	"X-RapidAPI-Host": "instagram28.p.rapidapi.com"
     }
     
