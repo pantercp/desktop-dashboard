@@ -57,7 +57,7 @@ def next_fixture():
     querystring = {"season":"2022","team":"62"}
     
     headers = {
-    	"X-RapidAPI-Key": "89a5450d92msh670a1a1da320cd1p1ce2b8jsn907bf0c5798c",
+    	"X-RapidAPI-Key": rapid_api_key,
     	"X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
     }
     
