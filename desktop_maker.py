@@ -51,6 +51,7 @@ def get_text_dimensions(text_string, font):
 
     return (text_width, text_height)
 
+
 '''
 DISPLAY OUTSTANDING OBJECTIVES
 '''
@@ -64,29 +65,35 @@ def draw_objectives():
             if row['Complete'] == 'FALSE':
                 objectives.append(row)
     
+    for row in objectives: # Change date format to sort by most recently completed
+        row['Deadline'] = datetime.strptime(row['Deadline'], '%d/%m/%Y')
+    # Sort by most recent dates
+    recent_objectives = sorted(objectives, key=lambda k: k['Deadline'], reverse=False)
+    
     y_coord = 605
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 25)
     draw.rectangle((1475, y_coord-5, 1915, y_coord + 35), light_clr)
     draw.text((1480, y_coord), "Objectives", dark_clr, font=FontHead)
     y_coord += 40
+    
+    # This makes sure the for loop runs if iterate num is more than index length
+    iterate_num = 7
+    if len(recent_objectives) < iterate_num:
+        iterate_num = len(recent_objectives)
+        
     # Font size for the Objectives
     FontObj = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 18)
-    for row in objectives:
-        deadline = row["Deadline"] # Get due date for objective
-        deadlineFormat = datetime.strptime(deadline, "%d/%m/%Y") # Format for function
-        countdown = objective_countdown(deadlineFormat) # Returns number of days left
-        # Draws objectives and deadline countdown onto wallpaper image
-        obj_width, obj_height = get_text_dimensions(f'{row["Objective"]}', FontObj)
+    for i in range(iterate_num):
+        countdown = objective_countdown(recent_objectives[i]["Deadline"]) # Returns number of days left
         days_width, days_height = get_text_dimensions(f'{countdown} Days', FontObj)
         draw.rectangle((1475, y_coord - 5, 1915, y_coord + 30), test_clr)    
-        draw.text((1480, y_coord), f'{row["Objective"]}', light_clr, font=FontObj)
+        draw.text((1480, y_coord), f'{recent_objectives[i]["Objective"]}', light_clr, font=FontObj)
         draw.text((1910 - days_width, y_coord), f'{countdown} Days', light_clr, font=FontObj)
         y_coord += 30 # Moves coordinate for next objective to be written
 
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
     
     return y_coord # So that the milestones can be drawn below the objectives
-
 
 '''
 FIND NUMBER OF DAYS LEFT TO COMPLETE OBJECTIVE
@@ -264,9 +271,6 @@ def draw_titles(x_coord_1, y_coord_1, x_coord_2, y_coord_2):
     
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
     
-    
-
-
 
 
 '''
@@ -279,12 +283,11 @@ datesave = today.strftime("%d-%m")
 file_name = r'\objectives.csv'
 DesktopImage = Image.open(source_dir+r'\background\template.png')
 draw = ImageDraw.Draw(DesktopImage)
-
+# Paste inspiration image on wallpaper
 inspire_wallpaper()
-
+# Preselect Fonnt and Colors
 fontsFolder = 'C:\Windows\Fonts'
-dark_clr, light_clr = (23, 42, 58), (105, 209, 197)
-test_clr = (12, 21, 29)
+dark_clr, light_clr, test_clr = (23, 42, 58), (105, 209, 197), (12, 21, 29)
 # Draws Objectives onto wallpaper and returns y for milestones
 y_coord = draw_objectives()
 # Draws Milestones below the objectives
@@ -307,12 +310,10 @@ draw_market(1750, 205)
 # Get next fixture details for SUFC
 opponent = next_fixture()
 draw_fixtures(1750, 320)
-
+# Get instagram details
 instagram = instagram_info("budget.backpackers")
-# instagram = {"account": "Budget Backpackers", "followers": 3359, "following": 996, "likes": 4272}
 draw_instagram(1500, 450)
-
+# Draw Personal/Productivity Dashboard
 draw_titles(1555, 10, 1535, 555)
 
-            
             
