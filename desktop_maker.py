@@ -277,21 +277,38 @@ DISPLAY UPCOMING BIRTHDAY
 
 def birthday_countdown():
 
-    DictList = []
+    DictDates = []
+    Upcoming_Dates = []
     
     with open(source_dir+r'\birthdays.csv', 'r', newline='') as read_obj:
         DictReader = csv.DictReader(read_obj)
         for row in DictReader:
-            if len(row["Birthday"]) != 10:
-                row["Complete"] = False
-            else:
-                row["Complete"] = True
-            DictList.append(row)
-            
-        print(DictList)
+            if len(row["Birthday"]) == 10: # Filter out dates with missing info            
+                row["Birthdate"] = row["Birthday"][0:6] + str(today.year) # Get birthdate for year
+                row["Birthdate"] = datetime.strptime(row["Birthdate"], '%d/%m/%Y') # Make into date time object  
+                row["Birthday"] = datetime.strptime(row["Birthday"], '%d/%m/%Y') # Make into date time object 
+                row["Countdown"] = objective_countdown(row["Birthdate"]) # Use timedelta function for time diff
+                DictDates.append(row)
+              
+        # Sort Birthdates by order throughout the year        
+        Sorted = sorted(DictDates, key = lambda item: item['Countdown'], reverse = False)
+        
+        print()
+        i = 0
+        for row in Sorted: # Print next 5 upcoming birthdays
+            if row["Countdown"] > 0 and i < 5:
+                print(f'{row["Name"]} turns {today.year - row["Birthday"].year}\
+ in {row["Countdown"]} days [{row["Birthday"].strftime("%d/%m/%y")}]')
+                Upcoming_Dates.append(row)
+                i += 1
+
+    return Upcoming_Dates
+    
 
       
-
+# christian = "03/03/1992"
+# christian = datetime.strptime(christian, '%d/%m/%Y')
+# diff = today.year - christian.year
 
 
 '''
@@ -337,6 +354,6 @@ dark_clr, light_clr, test_clr = (23, 42, 58), (105, 209, 197), (12, 21, 29)
 # # Draw Personal/Productivity Dashboard
 # draw_titles(1555, 10, 1535, 555)
 
-birthday_countdown()
+Upcoming_Dates = birthday_countdown()
 
             
