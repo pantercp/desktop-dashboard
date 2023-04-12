@@ -271,6 +271,27 @@ def draw_titles(x_coord_1, y_coord_1, x_coord_2, y_coord_2):
     
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
     
+'''
+DISPLAY UPCOMING BIRTHDAY
+'''
+
+def birthday_countdown():
+
+    DictList = []
+    
+    with open(source_dir+r'\birthdays.csv', 'r', newline='') as read_obj:
+        DictReader = csv.DictReader(read_obj)
+        for row in DictReader:
+            if len(row["Birthday"]) != 10:
+                row["Complete"] = False
+            else:
+                row["Complete"] = True
+            DictList.append(row)
+            
+        print(DictList)
+
+      
+
 
 
 '''
@@ -288,32 +309,34 @@ inspire_wallpaper()
 # Preselect Fonnt and Colors
 fontsFolder = 'C:\Windows\Fonts'
 dark_clr, light_clr, test_clr = (23, 42, 58), (105, 209, 197), (12, 21, 29)
-# Draws Objectives onto wallpaper and returns y for milestones
-y_coord = draw_objectives()
-# Draws Milestones below the objectives
-y_coord = draw_milestones(1480, y_coord)
-# Gathers prayer times for the day
-timings, hijri = prayer_api.prayer_timings()
-# Removes unneeded timings from dictionary
-timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),
-timings.pop("Sunset"),timings.pop("Midnight")
-# Draws the prayer times & hijri date on the desktop wallpaper
-draw_prayertimes(1500, 205)
-draw_hijri(5,5)
-# Get the weather forecast by City
-location, forecast = weather_forecast("Valletta")
-draw_forecast(1480, 60)
-# Get market prices for interested holdings
-symbol, price = gme_price()
-btc, eth = crypto_prices()
-draw_market(1750, 205)
-# Get next fixture details for SUFC
-opponent = next_fixture()
-draw_fixtures(1750, 320)
-# Get instagram details
-instagram = instagram_info("budget.backpackers")
-draw_instagram(1500, 450)
-# Draw Personal/Productivity Dashboard
-draw_titles(1555, 10, 1535, 555)
+# # Draws Objectives onto wallpaper and returns y for milestones
+# y_coord = draw_objectives()
+# # Draws Milestones below the objectives
+# y_coord = draw_milestones(1480, y_coord)
+# # Gathers prayer times for the day
+# timings, hijri = prayer_api.prayer_timings()
+# # Removes unneeded timings from dictionary
+# timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),
+# timings.pop("Sunset"),timings.pop("Midnight")
+# # Draws the prayer times & hijri date on the desktop wallpaper
+# draw_prayertimes(1500, 205)
+# draw_hijri(5,5)
+# # Get the weather forecast by City
+# location, forecast = weather_forecast("Valletta")
+# draw_forecast(1480, 60)
+# # Get market prices for interested holdings
+# symbol, price = gme_price()
+# btc, eth = crypto_prices()
+# draw_market(1750, 205)
+# # Get next fixture details for SUFC
+# opponent = next_fixture()
+# draw_fixtures(1750, 320)
+# # Get instagram details
+# instagram = instagram_info("budget.backpackers")
+# draw_instagram(1500, 450)
+# # Draw Personal/Productivity Dashboard
+# draw_titles(1555, 10, 1535, 555)
+
+birthday_countdown()
 
             
