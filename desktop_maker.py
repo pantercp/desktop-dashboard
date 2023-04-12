@@ -288,12 +288,13 @@ def birthday_countdown():
                 row["Birthdate"] = datetime.strptime(row["Birthdate"], '%d/%m/%Y') # Make into date time object  
                 row["Birthday"] = datetime.strptime(row["Birthday"], '%d/%m/%Y') # Make into date time object 
                 row["Countdown"] = objective_countdown(row["Birthdate"]) # Use timedelta function for time diff
+                row["Turns"] = today.year - row["Birthday"].year
                 DictDates.append(row)
               
         # Sort Birthdates by order throughout the year        
         Sorted = sorted(DictDates, key = lambda item: item['Countdown'], reverse = False)
         
-        print()
+        print("\nUpcoming Birthdays:\n")
         i = 0
         for row in Sorted: # Print next 5 upcoming birthdays
             if row["Countdown"] > 0 and i < 5:
@@ -305,11 +306,23 @@ def birthday_countdown():
     return Upcoming_Dates
     
 
-      
-# christian = "03/03/1992"
-# christian = datetime.strptime(christian, '%d/%m/%Y')
-# diff = today.year - christian.year
+'''
+DRAW CELEBRATION NOTIFICATIONS
+'''
 
+def draw_celebration(x_coord, y_coord):
+    
+    FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 24)
+    FontBody = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 22)
+    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 150, y_coord + 30), light_clr)
+    draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 150, y_coord + 85), test_clr)
+    draw.text((x_coord, y_coord), "Celebration", dark_clr, font=FontHead)
+    y_coord += 35
+    draw.text((x_coord, y_coord), f'{Upcoming_Dates[0]["Name"]} turns {Upcoming_Dates[0]["Turns"]}\
+\n     in {Upcoming_Dates[0]["Countdown"]} days!', light_clr, font=FontBody)
+    
+    DesktopImage.save(source_dir+r'\output\wallpaper.png')
+  
 
 '''
 PROGRAM RUNS FROM HERE
@@ -326,34 +339,33 @@ inspire_wallpaper()
 # Preselect Fonnt and Colors
 fontsFolder = 'C:\Windows\Fonts'
 dark_clr, light_clr, test_clr = (23, 42, 58), (105, 209, 197), (12, 21, 29)
-# # Draws Objectives onto wallpaper and returns y for milestones
-# y_coord = draw_objectives()
-# # Draws Milestones below the objectives
-# y_coord = draw_milestones(1480, y_coord)
-# # Gathers prayer times for the day
-# timings, hijri = prayer_api.prayer_timings()
-# # Removes unneeded timings from dictionary
-# timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),
-# timings.pop("Sunset"),timings.pop("Midnight")
-# # Draws the prayer times & hijri date on the desktop wallpaper
-# draw_prayertimes(1500, 205)
-# draw_hijri(5,5)
-# # Get the weather forecast by City
-# location, forecast = weather_forecast("Valletta")
-# draw_forecast(1480, 60)
-# # Get market prices for interested holdings
-# symbol, price = gme_price()
-# btc, eth = crypto_prices()
-# draw_market(1750, 205)
-# # Get next fixture details for SUFC
-# opponent = next_fixture()
-# draw_fixtures(1750, 320)
-# # Get instagram details
-# instagram = instagram_info("budget.backpackers")
-# draw_instagram(1500, 450)
-# # Draw Personal/Productivity Dashboard
-# draw_titles(1555, 10, 1535, 555)
-
+# Draws Objectives onto wallpaper and returns y for milestones
+y_coord = draw_objectives()
+# Draws Milestones below the objectives
+y_coord = draw_milestones(1480, y_coord)
+# Gathers prayer times for the day
+timings, hijri = prayer_api.prayer_timings()
+# Removes unneeded timings from dictionary
+timings.pop("Imsak"),timings.pop("Lastthird"),timings.pop("Firstthird"),
+timings.pop("Sunset"),timings.pop("Midnight")
+# Draws the prayer times & hijri date on the desktop wallpaper
+draw_prayertimes(1500, 205)
+draw_hijri(5,5)
+# Get the weather forecast by City
+location, forecast = weather_forecast("Valletta")
+draw_forecast(1480, 60)
+# Get market prices for interested holdings
+symbol, price = gme_price()
+btc, eth = crypto_prices()
+draw_market(1750, 205)
+# Get next fixture details for SUFC
+opponent = next_fixture()
+draw_fixtures(1750, 320)
+# Get instagram details
+instagram = instagram_info("budget.backpackers")
+draw_instagram(1500, 450)
+# Draw Personal/Productivity Dashboard
+draw_titles(1555, 10, 1535, 555)
 Upcoming_Dates = birthday_countdown()
-
+draw_celebration(1750, 450)
             
