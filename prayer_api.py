@@ -18,8 +18,8 @@ def prayer_timings():
     dateformat = today.strftime("%d-%m-%Y")
     month = today.strftime("%m")
     year = today.strftime("%Y")
-    city = "Valletta"
-    country = "Malta"
+    city = "London"
+    country = "United Kingdom"
     # Submit api request with desired details
     response = requests.get(f'http://api.aladhan.com/v1/calendarByCity/{year}/{month}?city={city}&country={country}&method=1')
     print(f'Response Status: {response.status_code}\n')

@@ -352,7 +352,7 @@ timings.pop("Sunset"),timings.pop("Midnight")
 draw_prayertimes(1500, 205)
 draw_hijri(5,5)
 # Get the weather forecast by City
-location, forecast = weather_forecast("Valletta")
+location, forecast = weather_forecast("London")
 draw_forecast(1480, 60)
 # Get market prices for interested holdings
 symbol, price = gme_price()
