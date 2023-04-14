@@ -323,6 +323,9 @@ def draw_celebration(x_coord, y_coord):
     
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
   
+    '''
+    ADD DIFFERENT TYPES OF DATES - BIRTHDAY AND ANNIVERSARIES
+    '''
 
 '''
 PROGRAM RUNS FROM HERE
