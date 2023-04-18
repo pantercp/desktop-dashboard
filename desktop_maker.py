@@ -327,6 +327,9 @@ def draw_celebration(x_coord, y_coord):
     ADD DIFFERENT TYPES OF DATES - BIRTHDAY AND ANNIVERSARIES
     '''
 
+# If event == "Anniversary":
+    # Draw different kind of text
+
 '''
 PROGRAM RUNS FROM HERE
 '''
