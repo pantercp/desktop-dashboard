@@ -26,20 +26,26 @@ def instagram_info(account):
 
     data = response.json()
     
-    account = data["data"]["user"]
-    posts = data["data"]["user"]["edge_owner_to_timeline_media"]["edges"]
-    followers = account["edge_followed_by"]["count"]
-    following = account["edge_follow"]["count"]
-    
-    likes = 0
-    for post in posts:
-        likes += post["node"]["edge_liked_by"]["count"]
-    
-    
-    print(f'Account: {account["ads_page_name"]}\nFollowers: {followers}\nFollowing: {following}\n\
+    try:
+        
+        account = data["data"]["user"]
+        posts = data["data"]["user"]["edge_owner_to_timeline_media"]["edges"]
+        followers = account["edge_followed_by"]["count"]
+        following = account["edge_follow"]["count"]
+        
+        likes = 0
+        for post in posts:
+            likes += post["node"]["edge_liked_by"]["count"]
+
+        print(f'Account: {account["ads_page_name"]}\nFollowers: {followers}\nFollowing: {following}\n\
 Last 12 Posts: {likes} Likes')
     
-    instagram = {"account": account["ads_page_name"], "followers": followers, "following": following, "likes": likes}
+        instagram = {"account": account["ads_page_name"], "followers": followers, "following": following, "likes": likes}
+    
+    except KeyError as k_err:
+        print(k_err)
+        instagram = {"account": "Budget Backpackers", "followers": "Caught", "following": "Error!", "likes": "N/A"}
+
     
     return instagram
 
