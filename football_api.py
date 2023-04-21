@@ -99,9 +99,17 @@ def next_fixture():
         opponent = {"name": remaining_fixtures[0]["teams"]["away"]["name"],\
                     "id": remaining_fixtures[0]["teams"]["away"]["id"],\
                         "venue": "Home", "date": remaining_fixtures[0]["fixture"]["date"]}
+
+    try:     
+        form = get_form(opponent["id"])
+        opponent["form"] = form
+    except TypeError as t_err:
+        print(t_err)
+        opponent["form"] = "Caught Error!"
         
-    form = get_form(opponent["id"])
-    opponent["form"] = form
+        
+    
+
     
     return opponent
 
@@ -112,6 +120,5 @@ PROGRAM RUNS FROM HERE
 
 today = date.today()
 my_datetime = datetime.combine(today, datetime.min.time())
-
 
 
