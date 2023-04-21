@@ -232,8 +232,14 @@ def draw_fixtures(x_coord, y_coord):
     draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 130, y_coord + 100), test_clr)
     draw.text((x_coord + 7, y_coord), 'The Blades', dark_clr, font=FontHead)
     y_coord += 35
-    draw.text((x_coord, y_coord), f'  {opponent["date"]}\n {opponent["name"][0:12]} ({opponent["venue"][0]})\
+    
+    if opponent["form"] != "Caught Error!":
+        draw.text((x_coord, y_coord), f'  {opponent["date"]}\n{opponent["name"][0:12]} ({opponent["venue"][0]})\
 \n      {opponent["form"]}', light_clr, font=FontBody)
+    else: 
+        draw.text((x_coord, y_coord), f'  {opponent["date"]}\n{opponent["name"][0:12]} ({opponent["venue"][0]})\
+\n  {opponent["form"]}', light_clr, font=FontBody)
+        
     y_coord += 35
     
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
@@ -297,7 +303,7 @@ def birthday_countdown():
         print("\nUpcoming Birthdays:\n")
         i = 0
         for row in Sorted: # Print next 5 upcoming birthdays
-            if row["Countdown"] > 0 and i < 5:
+            if row["Countdown"] >= 0 and i < 5:
                 print(f'{row["Name"]} turns {today.year - row["Birthday"].year}\
  in {row["Countdown"]} days [{row["Birthday"].strftime("%d/%m/%y")}]')
                 Upcoming_Dates.append(row)
@@ -318,8 +324,13 @@ def draw_celebration(x_coord, y_coord):
     draw.rectangle((x_coord - 5, y_coord + 30, x_coord + 150, y_coord + 85), test_clr)
     draw.text((x_coord, y_coord), "Celebration", dark_clr, font=FontHead)
     y_coord += 35
-    draw.text((x_coord, y_coord), f'{Upcoming_Dates[0]["Name"]} turns {Upcoming_Dates[0]["Turns"]}\
+    
+    if Upcoming_Dates[0]["Countdown"] != 0:
+        draw.text((x_coord, y_coord), f'{Upcoming_Dates[0]["Name"]} turns {Upcoming_Dates[0]["Turns"]}\
 \n     in {Upcoming_Dates[0]["Countdown"]} days!', light_clr, font=FontBody)
+    else:
+        draw.text((x_coord, y_coord), f'{Upcoming_Dates[0]["Name"]} turns {Upcoming_Dates[0]["Turns"]}\
+\n     Today!!!', light_clr, font=FontBody)        
     
     DesktopImage.save(source_dir+r'\output\wallpaper.png')
   
