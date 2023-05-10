@@ -121,4 +121,3 @@ PROGRAM RUNS FROM HERE
 today = date.today()
 my_datetime = datetime.combine(today, datetime.min.time())
 
-

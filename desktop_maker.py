@@ -375,9 +375,9 @@ draw_forecast(1480, 60)
 symbol, price = gme_price()
 btc, eth = crypto_prices()
 draw_market(1750, 205)
-# Get next fixture details for SUFC
-opponent = next_fixture()
-draw_fixtures(1750, 320)
+# # Get next fixture details for SUFC
+# opponent = next_fixture()
+# draw_fixtures(1750, 320)
 # Get instagram details
 instagram = instagram_info("budget.backpackers")
 draw_instagram(1500, 450)
