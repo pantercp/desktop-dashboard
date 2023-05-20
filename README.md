@@ -153,7 +153,7 @@ This refers to the list of affirmations and things to be grateful for which can 
 ## Contact
 
 Christian Panter - https://www.linkedin.com/in/christianpanter/ - cjpixeluk@gmail.com
-Freelance Website - https://pantercp.github.io/Personal_Portfolio_Website/
+Freelance Website - https://cjpixel.uk
 
 Project Link: [https://github.com/pantercp/desktop-dashboard.git](https://github.com/github_username/repo_name)
 
