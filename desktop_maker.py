@@ -173,7 +173,7 @@ DRAW PRAYER TIMES FOR CURRENT DAY ONTO WALLPAPER
 def draw_hijri(x_coord, y_coord):
 
     FontHead = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 20)
-    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 240, y_coord + 50), test_clr)
+    draw.rectangle((x_coord - 5, y_coord - 5, x_coord + 270, y_coord + 50), test_clr)
     draw.text((x_coord, y_coord), f'Date: {hijri["day"]} {hijri["month"]["en"]} \
 {hijri["year"]}{hijri["designation"]["abbreviated"]}\nWeekday: {hijri["weekday"]["en"]}'\
 , light_clr, font=FontHead)
