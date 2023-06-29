@@ -152,7 +152,7 @@ This refers to the list of affirmations and things to be grateful for which can 
 <!-- CONTACT -->
 ## Contact
 
-Christian Panter - https://www.linkedin.com/in/christianpanter/ - cjpixeluk@gmail.com
+Christian Panter - https://www.linkedin.com/in/christianpanter/ - info@cjpixel.uk
 Freelance Website - https://cjpixel.uk
 
 Project Link: [https://github.com/pantercp/desktop-dashboard.git](https://github.com/github_username/repo_name)
