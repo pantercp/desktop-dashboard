@@ -147,7 +147,7 @@ The image for the centre of the Desktop Wallpaper is chosen at random from the *
 
 ### Inspiration
 
-This refers to the list of affirmations and things to be grateful for which can be found within **inspire.csv** file. Here you can add, delete or change any affirmations or things to be grateful for and the program will continue to select a random one every time it runs.
+This refers to the list of affirmations and things to be grateful for which can be found within **inspire.csv** file. Here you can add, delete or change any affirmations or things to be grateful for and the program will continue to select a random one for the inspirational image every time it runs.
 
 <!-- CONTACT -->
 ## Contact
