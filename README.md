@@ -83,7 +83,7 @@ Once the program is correctly installed and configured, running the program goes
 
 The program first enters the "Productivity Dashboard" which enables you to manage your personal objectives. Here you can view, add, edit, delete and complete any personal objectives that you have. The objectives are all stored within a csv file which records the following for each of them: Date, Category, Objective, Deadline, Complete (date). The objectives will be displayed with the number of days left to complete it.
 
-Adding an objective -  Records todays date automatically, whilst Category, Objective and Deadline are all requested user inputs, and Complete is automatically set to "FALSE".
+Adding an objective - Records todays date automatically, whilst Category, Objective and Deadline are all requested user inputs, and Complete is automatically set to "FALSE".
 
 Completing an objective - This function asks you to define which objective you have completed and to then enter the completion date. Once an Objective has a complete date it is treated as a Milestone.
 
@@ -99,7 +99,7 @@ Every time the program runs it uses the **choice** module to randomly choose: an
 
 ### Desktop Maker
 
-To give the program a wallpaper image to work from I created a 1920x1080 image in Canva, which gives the desired background image and defines space on the left hand side for placing desktop shortcuts and files. for different screen sizes you may have to adjust the size of the background image.
+To give the program a wallpaper image to work from I created a 1920x1080 image in Canva, which gives the desired background image and defines space on the left hand side for placing desktop shortcuts and files. For different screen sizes you may have to adjust the size of the background image.
 
 <img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/template.jpg" alt="Logo" width="50%" height="50%">
 
