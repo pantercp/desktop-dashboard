@@ -85,7 +85,7 @@ The program first enters the "Productivity Dashboard" which enables you to manag
 
 Adding an objective - Records todays date automatically, whilst Category, Objective and Deadline are all requested user inputs, and Complete is automatically set to "FALSE".
 
-Completing an objective - This function asks you to define which objective you have completed and to then enter the completion date. Once an Objective has a complete date it is treated as a Milestone.
+Completing an objective - This function asks you to define which objective you have completed and then enter the completion date. Once an Objective has a complete date it is treated as a Milestone.
 
 At the later stage - **Desktop Maker**, the objectives csv file is then used to access this information and then draws these objectives and milestones onto the desktop wallpaper.
 
