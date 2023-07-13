@@ -107,7 +107,7 @@ At this point the program then retrieves the image created from **Inspirational 
 
 After this the **Desktop Maker** draws all of the information shown to the right of the centre image.  Which is split into two main sections - personal and productivity. 
 
-The productivity information is found in objectives.csv, it enters this file and draws all of the outstanding Objectives onto the template wallpaper along with the amount of days remaining until the deadline for completion. Then the three most recently completed Objectives are then drawn on the wallpaper as Milestones.
+The productivity information is found in objectives.csv, the program enters this file and draws all of the outstanding Objectives onto the template wallpaper along with the amount of days remaining until the deadline for completion. Then the three most recently completed Objectives are then drawn on the wallpaper as Milestones.
 
 <img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-5.jpg" alt="Logo" width="30%" height="30%"> 
 
