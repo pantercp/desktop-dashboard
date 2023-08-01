@@ -81,7 +81,7 @@ Once the program is correctly installed and configured, running the program goes
 
 ### Productivity Dashboard
 
-The program first enters the "Productivity Dashboard" which enables you to manage your personal objectives. Here you can view, add, edit, delete and complete any personal objectives that you have. The objectives are all stored within a csv file which records the following for each of them: Date, Category, Objective, Deadline, Complete (date). The objectives will be displayed with the number of days left to complete it.
+The program first enters the "Productivity Dashboard" which enables you to manage your personal objectives. Here you can view, add, edit, delete and complete any personal objectives that you have. The objectives are all stored within a csv file which records the following for each of them: Date, Category, Objective, Deadline (date), Complete (date). The objectives will be displayed with the number of days left to complete it.
 
 Adding an objective - Records todays date automatically, whilst Category, Objective and Deadline are all requested user inputs, and Complete is automatically set to "FALSE".
 
