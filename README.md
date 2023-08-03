@@ -87,7 +87,7 @@ Adding an objective - Records todays date automatically, whilst Category, Object
 
 Completing an objective - This function asks you to define which objective you have completed and then enter the completion date. Once an Objective has a complete date it is treated as a Milestone.
 
-At the later stage - **Desktop Maker**, the objectives csv file is then used to access this information and then draws these objectives and milestones onto the desktop wallpaper.
+At the later stage - **Desktop Maker**, the objectives csv file is then used to access this information and then draws these objectives and milestones onto the desktop wallpaper image.
 
 ### Inspirational Image
 
