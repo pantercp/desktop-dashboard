@@ -99,7 +99,7 @@ Every time the program runs it uses the **choice** module to randomly choose: an
 
 ### Desktop Maker
 
-To give the program a wallpaper image to work from I created a 1920x1080 image in Canva, which gives the desired background image and defines space on the left hand side for placing desktop shortcuts and files. For different screen sizes you may have to adjust the size of the background image.
+To give the program a wallpaper image to work from I created a 1920x1080 image in Canva, which gives the desired background image and defines space on the left hand side for placing desktop shortcuts and files. For different screen sizes you may have to adjust the size of the template background image.
 
 <img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/template.jpg" alt="Logo" width="50%" height="50%">
 
