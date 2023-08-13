@@ -143,7 +143,7 @@ To install the same versions of all of these modules, activate your desired virt
 
 ### Images
 
-The image for the centre of the Desktop Wallpaper is chosen at random from the **images** folder. For this program to work at its best please add your desired images to the folder in a 1080x1080px format. The more images you add the better as the chosen images will be less repetitive. For my version I use a selection of 99 images.
+The image for the centre of the Desktop Wallpaper is chosen at random from the **images** folder. For this program to work at its best please add your desired images to the folder in a 1080 x 1080px format. The more images you add the better as the chosen images will be less repetitive. For my version I use a selection of 99 images.
 
 ### Inspiration
 
