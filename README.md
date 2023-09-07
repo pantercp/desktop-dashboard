@@ -67,7 +67,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-NinetyNine creates a completely unique desktop wallpaper background every day to keep you inspired and is comprised of an inspirational image in the centre, with space to the left to organise your desktop shortcuts and temporary files. On the right side of the image there is a space to be utilised for what I refer to as your personal dashboard.
+NinetyNine creates a completely unique desktop wallpaper background every day to keep you inspired and is comprised of an inspirational image in the centre, with space to the left to organise your desktop shortcuts and temporary files. On the right side of the image there is a space to be utilised for what I refer to as your personal-dashboard.
 
 <img src="https://github.com/pantercp/desktop-dashboard/blob/master/examples/example-1.jpg" alt="Logo" width="100%" height="100%">
 
